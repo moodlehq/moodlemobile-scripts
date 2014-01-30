@@ -1,8 +1,16 @@
 #!/bin/bash
+DIR_BASE=/Users/juanleyvadelgado/Documents/MoodleMobile/apktool
 GIT_BASE=/Users/juanleyvadelgado/Documents/MoodleMobile/GIT
 KEYSTORE=/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile.keystore
 EMAIL=mobile@cvaconsulting.com
 
+if [ $# -eq 0 ]
+  then
+    echo "Missing version argument (133, 134...)"
+    exit 1
+fi
+
+cd $DIR_BASE/moodlemobile$1
 rm MoodleMobile$1.apk
 rm MoodleMobile$1Store.apk
 rsync -a --exclude='.*' $GIT_BASE/ tmpdir/assets/www/
