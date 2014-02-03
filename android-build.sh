@@ -11,7 +11,7 @@ EMAIL=mobile@cvaconsulting.com
 
 if [ $# -eq 0 ]
   then
-    echo "Missing version argument (133, 134...)"
+    echo "./android-build.sh version"
     exit 1
 fi
 

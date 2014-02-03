@@ -17,7 +17,7 @@ LINES_MIN=150
 
 if [ $# -eq 0 ]
   then
-    echo "Missing file modified time number of days to look for"
+    echo "./fetch-langpacks.sh days"
     exit 1
 fi
 
