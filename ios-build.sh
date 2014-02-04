@@ -18,7 +18,8 @@ KEY_ID=$3
 KEY_PASSWORD=$4
 
 curl -X PUT -d \
-  \'data={"pull":"true", "keys": {"ios":{"id": "$KEY_ID", "password": "$KEY_PASSWORD"}}\' \
+  "data={\"pull\":\"true\", \"keys\": {\"ios\":{\"id\": \"$KEY_ID\", \"password\": \"$KEY_PASSWORD\"}}}" \
   https://build.phonegap.com/api/v1/apps/$APPID?auth_token=$TOKEN
+
 
 echo "https://build.phonegap.com/apps/$APPID/builds" | mutt -s "MoodleMobile$1Store.ipa" -- $EMAIL
