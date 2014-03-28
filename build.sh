@@ -27,5 +27,5 @@ curl -X PUT -d \
   }}" \
   https://build.phonegap.com/api/v1/apps/$APPID?auth_token=$TOKEN
 
-
-echo "https://build.phonegap.com/apps/$APPID/builds" | mutt -s "MoodleMobile$1Store.ipa" -- $EMAIL
+date=`date`
+echo "https://build.phonegap.com/apps/$APPID/builds" | mutt -s "Apps builds $date" -- $EMAIL
