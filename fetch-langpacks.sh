@@ -12,6 +12,8 @@ GIT_PATH="/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle
 BRANCH="MOODLE_26_STABLE"
 # Directory where Moodle Mobile lang files are located
 LANG_DIR="/Users/juanleyvadelgado/Documents/MoodleMobile/GIT/lang"
+# Conversion script
+CONV_SCRIPT="/Users/juanleyvadelgado/Documents/MoodleMobile/scripts/stringtojson.php"
 # Minimun number of strings translated the language pack should have
 LINES_MIN=150
 
@@ -35,9 +37,7 @@ do
     if [ $lang != "en" ]
     then
       # Convert a Moodle php lang file to a Moodle Mobile json lang file
-      file=$(cat $f | grep "\$string" | sed "s/\\\'/'/g" | sed "s/\$string\['/\"/g" | sed "s/'\] = '/\": \"/g" | sed "s/';/\",/g")
-      # Create a valid json file
-      echo "{$file}" | sed "s/,}/}/g"  > $LANG_DIR/$lang.json
+      php $CONV_SCRIPT $f  > $LANG_DIR/$lang.json
       echo "File $lang.json created"
     fi
   fi
