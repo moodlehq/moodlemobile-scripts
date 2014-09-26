@@ -8,7 +8,7 @@ JSON_FILE="/Users/juanleyvadelgado/Documents/MoodleMobile/GIT/lang/en.json"
 # Destination file
 STRING_FILE="/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-local_moodlemobileapp/lang/en/local_moodlemobileapp.php"
 
-header=`cat $STRING_FILE | head -30`
+header=`cat $STRING_FILE | head -25`
 
 echo "$header" > $STRING_FILE
 

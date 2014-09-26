@@ -33,6 +33,8 @@ if (file_exists($file)) {
 }
 
 if (!empty($string)) {
+    // Skip appstoredescription.
+    unset($string['appstoredescription']);
     echo json_encode($string, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 }
 
