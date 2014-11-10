@@ -28,6 +28,7 @@ $file = $argv[1];
 
 $string = array();
 if (file_exists($file)) {
+    // The language string file checks for this constant.
     define("MOODLE_INTERNAL", 1);
     include($file);
 }
