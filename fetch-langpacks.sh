@@ -37,7 +37,7 @@ do
     if [ $lang != "en" ]
     then
       # Convert a Moodle php lang file to a Moodle Mobile json lang file
-      php $CONV_SCRIPT $f  > $LANG_DIR/$lang.json
+      php $CONV_SCRIPT $lang $f
       echo "File $lang.json created"
     fi
   fi

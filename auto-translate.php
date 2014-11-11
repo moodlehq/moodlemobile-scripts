@@ -15,8 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Script for converting a language string file in Moodle to a JSON language file for Moodle Mobile
- * This script is called by fetch-langpacks.sh passing as argument the file to convert
+ * Script for translating strings based on the string Id
+ * This script search for string Ids defined in the app language JSON files in the Moodle language file specified as parameter
+ * NOTE: Translations for that strings Ids in AMOS overwrites this automatic translation (see fetch-langpacks.sh)
  */
 
 // Check we are in CLI.
@@ -57,7 +58,7 @@ foreach ($languages as $lang) {
     $stringfile = STRING_FILES_PATH . "$lang/$stringfilename";
     if (!file_exists($stringfile)) {
         print("String file $stringfilename doesn't exists for language $lang (Path: $stringfile)\n");
-        exit(1);
+        continue;
     }
 
     print("=========================\n");
@@ -80,7 +81,7 @@ foreach ($languages as $lang) {
             print("$id found -> " . $string[$id] . " \n");
             $jsonstrings[$id] = $string[$id];
             $found = true;
-        } else {
+        } else if (empty($jsonstrings[$id])) {
             print("NOT $id found \n");
         }
     }

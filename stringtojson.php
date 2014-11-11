@@ -24,7 +24,11 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
     exit(1);
 }
 
-$file = $argv[1];
+define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle-langpacks/");
+define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/GIT/lang/");
+
+$lang = $argv[1];
+$file = $argv[2];
 
 $string = array();
 if (file_exists($file)) {
@@ -36,7 +40,18 @@ if (file_exists($file)) {
 if (!empty($string)) {
     // Skip appstoredescription.
     unset($string['appstoredescription']);
-    echo json_encode($string, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+
+    $jsonfile = JSON_FILES_PATH . "$lang.json";
+    $jsonstrings = file_get_contents($jsonfile);
+    $jsonstrings = (array) json_decode($jsonstrings);
+
+    // We overwrite existing translations that maybe were automatically created by auto-translate.php.
+    foreach ($string as $id => $content) {
+        $jsonstrings[$id] = $content;
+    }
+
+    ksort($jsonstrings);
+    file_put_contents($jsonfile, json_encode($jsonstrings, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 }
 
 // Exit 0 mean success.
