@@ -28,7 +28,7 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("MOODLE_INTERNAL", 1);
 
 define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle-langpacks/");
-define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/GIT/lang/");
+define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile-phonegapbuild/build/lang/");
 
 if (count($argv) != 2) {
     print("Missing parameter string file name: (grades.php, moodle.php, ..)\n");
@@ -36,6 +36,8 @@ if (count($argv) != 2) {
 }
 
 $stringfilename = $argv[1];
+$numfound = 0;
+$numnotfound = 0;
 
 $files = scandir(JSON_FILES_PATH);
 $languages = array();
@@ -81,8 +83,10 @@ foreach ($languages as $lang) {
             print("$id found -> " . $string[$id] . " \n");
             $jsonstrings[$id] = $string[$id];
             $found = true;
+            $numfound++;
         } else if (empty($jsonstrings[$id])) {
             print("NOT $id found \n");
+            $numnotfound++;
         }
     }
 
@@ -91,8 +95,11 @@ foreach ($languages as $lang) {
         ksort($jsonstrings);
         file_put_contents($jsonfile, json_encode($jsonstrings, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     }
-    print("=========================\n");
+    print("=========================\n\n");
 }
+
+print("Found $numfound\n");
+print("Not found $numnotfound\n\n");
 
 // Exit 0 mean success.
 exit(0);
