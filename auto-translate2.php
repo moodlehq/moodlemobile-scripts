@@ -28,9 +28,11 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("MOODLE_INTERNAL", 1);
 
 define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle-langpacks/");
-define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile-phonegapbuild/build/lang/");
+define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/");
+define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/");
 
-$moodlestringfiles = array('moodle.php', 'badges.php', 'assign.php', 'feedback.php', 'repository_coursefiles.php');
+$moodlestringfiles = array('moodle.php', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
+                            'feedback.php', 'repository_coursefiles.php', 'forum.php');
 $numfound = 0;
 $numnotfound = 0;
 $notfound = array();
@@ -81,7 +83,7 @@ foreach ($moodlestringfiles as $stringfilename) {
 
             if (empty($jsonstrings[$id]) and !empty($string[$plainid])) {
                 print("$id found -> " . $string[$plainid] . " \n");
-                $jsonstrings[$id] = $string[$plainid];
+                $jsonstrings[$id] = str_replace('{$a}', '{{$a}}',$string[$plainid]);
                 $found = true;
                 $numfound++;
             } else if (empty($jsonstrings[$id])) {
@@ -94,6 +96,29 @@ foreach ($moodlestringfiles as $stringfilename) {
             // Order the array.
             ksort($jsonstrings);
             file_put_contents($jsonfile, str_replace('\/', '/', json_encode($jsonstrings, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)));
+        }
+
+        // Split the translation.
+        $componenttranslations = array();
+        foreach ($jsonstrings as $key => $value) {
+            list($type, $component, $plainid) = explode('.', $key);
+            $componenttranslations["$type.$component"][$plainid] = $value;
+        }
+
+        foreach ($componenttranslations as $key => $strings) {
+            list($type, $component) = explode('.', $key);
+            if ($type == 'mma') {
+                $path = CORE_FILES_PATH . "addons/$component/lang/$lang.json";
+            } else {
+                switch ($component) {
+                    case 'core':
+                        $path = CORE_FILES_PATH . "core/lang/$lang.json";
+                        break;
+                    default:
+                        $path = CORE_FILES_PATH . "core/components/$component/lang/$lang.json";
+                }
+            }
+            file_put_contents($path, str_replace('\/', '/', json_encode($strings, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)));
         }
     }
 }

@@ -24,7 +24,9 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
     exit(1);
 }
 
-define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile-phonegapbuild/build/lang/");
+define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/");
+define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/");
+
 
 $lang = str_replace('_', '-', $argv[1]);
 $file = $argv[2];
@@ -57,6 +59,29 @@ if (!empty($string)) {
 
     ksort($jsonstrings);
     file_put_contents($jsonfile, json_encode($jsonstrings, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+
+    // Split the translation.
+    $componenttranslations = array();
+    foreach ($jsonstrings as $key => $value) {
+        list($type, $component, $plainid) = explode('.', $key);
+        $componenttranslations["$type.$component"][$plainid] = $value;
+    }
+
+    foreach ($componenttranslations as $key => $strings) {
+        list($type, $component) = explode('.', $key);
+        if ($type == 'mma') {
+            $path = CORE_FILES_PATH . "addons/$component/lang/$lang.json";
+        } else {
+            switch ($component) {
+                case 'core':
+                    $path = CORE_FILES_PATH . "core/lang/$lang.json";
+                    break;
+                default:
+                    $path = CORE_FILES_PATH . "core/components/$component/lang/$lang.json";
+            }
+        }
+        file_put_contents($path, str_replace('\/', '/', json_encode($strings, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)));
+    }
 }
 
 // Exit 0 mean success.
