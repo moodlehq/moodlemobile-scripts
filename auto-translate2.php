@@ -32,7 +32,7 @@ define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/mood
 define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/");
 
 $moodlestringfiles = array('moodle.php', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
-                            'feedback.php', 'repository_coursefiles.php', 'forum.php');
+                            'feedback.php', 'repository_coursefiles.php', 'forum.php', 'survey.php', 'lti.php');
 $numfound = 0;
 $numnotfound = 0;
 $notfound = array();

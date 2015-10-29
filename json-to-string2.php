@@ -64,6 +64,9 @@ $templatefile = "<?php
 ";
 
 foreach ($finalstrings as $key => $value) {
+    if (strpos($key, 'mm.core.country') !== false) {
+        continue;
+    }
     $value = str_replace("'", "\'", $value);
     $templatefile .= '$string' . "['$key'] = '$value';\n";
 }
