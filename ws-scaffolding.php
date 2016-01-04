@@ -234,8 +234,74 @@ $functiontpl = "
     }
 ";
 
+$returnlist = "";
+foreach ($data->returns as $parameter => $pdata) {
+    if ($pdata->type == "external_multiple_structure") {
 
-$returnstpl = "";
+        $parameterslist = "'$parameter' => new external_multiple_structure(\n";
+
+        if (!empty($pdata->external_single_structure)) {
+            $parameterslist .= "                    new external_single_structure(
+                        array(";
+
+            foreach ($pdata->external_single_structure as $singlestructure) {
+                // Read from XMLDB.
+                if (!empty($singlestructure->from) && $singlestructure->from == 'xmldb') {
+                    $file = $data->moodlebasepath . "/". $singlestructure->file;
+                    $xmldb = simplexml_load_file($file);
+
+                    // Extract fields.
+                    $tabledata = array();
+                    foreach ($xmldb->TABLES->TABLE as $table) {
+                        foreach ($table->attributes() as $key => $val) {
+                            if ($key == "NAME" and $val == $singlestructure->table) {
+                                foreach ($table->FIELDS->FIELD as $field) {
+                                    $fielddata = array();
+                                    foreach ($field->attributes() as $key => $val) {
+                                        $fielddata[strtolower($key)] = (string) $val;
+                                    }
+                                    $name = $fielddata['name'];
+                                    $tabledata[$name] = $fielddata;
+                                }
+                                break 2;
+                            }
+                        }
+                    }
+
+                    // Now we have all the fields.
+                    foreach ($tabledata as $fieldname => $fielddata) {
+                        $externaldata = new stdClass;
+                        $externaldata->type = ($fielddata['type'] == 'int') ? 'PARAM_INT' : 'PARAM_RAW';
+                        $externaldata->description = (!empty($fielddata['comment'])) ? str_replace("'", "\'", $fielddata['comment']) : '';
+                        $externaldata->required = 'VALUE_OPTIONAL';
+                        $parameterslist .= "\n                            '$fieldname' => " . print_external_value($externaldata);
+                    }
+                }
+            }
+            $parameterslist .= "\n                        )";
+            $parameterslist .= "\n                    )";
+            $parameterslist .= "\n                ),";
+        }
+    }
+}
+
+
+$returnstpl = "
+    /**
+     * Describes the $function return value.
+     *
+     * @return external_single_structure
+     * @since $data->since
+     */
+    public static function ${function}_returns() {
+        return new external_single_structure(
+            array(
+                $parameterslist
+                'warnings' => new external_warnings(),
+            )
+        );
+    }
+";
 
 file_replace_contents($externalfile, "\n}\n", $parameterstpl . $functiontpl . $returnstpl . "\n}\n");
 
