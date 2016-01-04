@@ -31,8 +31,9 @@ define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/mood
 define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/");
 define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/");
 
-$moodlestringfiles = array('moodle.php', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
-                            'feedback.php', 'repository_coursefiles.php', 'forum.php', 'survey.php', 'lti.php');
+$moodlestringfiles = array('my.php', 'moodle.php', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
+                            'feedback.php', 'repository_coursefiles.php', 'forum.php', 'survey.php', 'lti.php', 'enrol_self.php',
+                            'search.php');
 $numfound = 0;
 $numnotfound = 0;
 $notfound = array();
@@ -84,6 +85,8 @@ foreach ($moodlestringfiles as $stringfilename) {
             if (empty($jsonstrings[$id]) and !empty($string[$plainid])) {
                 print("$id found -> " . $string[$plainid] . " \n");
                 $jsonstrings[$id] = str_replace('{$a}', '{{$a}}',$string[$plainid]);
+                // Prevent double.
+                $jsonstrings[$id] = str_replace('{{{$a}}}', '{{$a}}',$jsonstrings[$id]);
                 $found = true;
                 $numfound++;
             } else if (empty($jsonstrings[$id])) {
@@ -118,7 +121,13 @@ foreach ($moodlestringfiles as $stringfilename) {
                         $path = CORE_FILES_PATH . "core/components/$component/lang/$lang.json";
                 }
             }
-            file_put_contents($path, str_replace('\/', '/', json_encode($strings, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)));
+
+            $jsonstrings = file_get_contents($path);
+            $jsonstrings = (array) json_decode($jsonstrings);
+
+            $finalstrings = array_replace($jsonstrings, $strings);
+            ksort($finalstrings);
+            file_put_contents($path, str_replace('\/', '/', json_encode($finalstrings, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)));
         }
     }
 }

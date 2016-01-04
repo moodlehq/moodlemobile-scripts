@@ -54,6 +54,9 @@ if (!empty($string)) {
             echo "lang $lang: omitting $id \n";
             continue;
         }
+        $content = str_replace('{$a}', '{{$a}}', $content);
+        // Prevent double.
+        $content = str_replace('{{{$a}}}', '{{$a}}', $content);
         $jsonstrings[$id] = $content;
     }
 
