@@ -156,10 +156,25 @@ file_replace_contents($servicesfile, ");", $template . "\n);");
 
 // Create the external functions.
 
+$parametersdoc = "";
+$parametersdec = "";
 $parameterslist = "";
+$parametersarr = "";
 
 foreach ($data->parameters as $parameter => $pdata) {
+    $parametersarr = "\n            '$parameter' => \$$parameter,";
     if ($pdata->type == "external_multiple_structure") {
+        $parametersdoc .= "\n     * @param array \$${parameter} $pdata->description";
+
+        if (!empty($parametersdec)) {
+            $parametersdec .= " ,";
+        }
+
+        $parametersdec .= "\$${parameter}";
+        if ($pdata->default) {
+            $parametersdec .= " = array()";
+        }
+
         $parameterslist = "'$parameter' => new external_multiple_structure(\n";
 
         if (!empty($pdata->external_value)) {
@@ -196,12 +211,34 @@ $parameterstpl = "
     }
 ";
 
-file_replace_contents($externalfile, "\n}\n", $parameterstpl . "\n}\n");
 
-$functiontpl = "";
+$functiontpl = "
+    /**
+     * $data->description
+     * $parametersdoc
+     * @return array of surveys details
+     * @since $data->since
+     */
+    public static function $function($parametersdec) {
+
+        \$warnings = array();
+
+        \$params = { $parametersarr
+        };
+        \$params = self::validate_parameters(self::${function}_parameters(), \$params);
+
+        \$result = array();
+        \$result[''] = $;
+        \$result['warnings'] = \$warnings;
+        return \$result;
+    }
+";
 
 
 $returnstpl = "";
+
+file_replace_contents($externalfile, "\n}\n", $parameterstpl . $functiontpl . $returnstpl . "\n}\n");
+
 
 // Exit 0 mean success.
 exit(0);
