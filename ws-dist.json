@@ -1,0 +1,65 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_quiz_get_quizzes_by_courses",
+    "description": "Returns a list of quizzes in a provided list of courses, if no list is provided all quizzes that the user can view will be returned.",
+    "type": "read",
+    "capabilities": "mod/quiz:view",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": true,
+    "addtothemobileservice": true,
+    "parameters": {
+        "courseids": {
+            "type": "external_multiple_structure",
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "course id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            },
+            "description": "Array of course ids",
+            "required": "VALUE_DEFAULT",
+            "default": "array()"
+        }
+    },
+    "returns": {
+        "quizzes": {
+            "type": "external_multiple_structure",
+            "external_single_structure": [
+                {
+                    "from": "xmldb",
+                    "file": "mod/quiz/db/install.xml",
+                    "table": "quiz"
+                },
+                {
+                    "name": "visible",
+                    "type": "PARAM_INT",
+                    "description": "visible",
+                    "required": "VALUE_OPTIONAL",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "groupmode",
+                    "type": "PARAM_INT",
+                    "description": "visible",
+                    "required": "VALUE_OPTIONAL",
+                    "default": "group mode",
+                    "allownull": ""
+                },
+                {
+                    "name": "groupingid",
+                    "type": "PARAM_INT",
+                    "description": "grouping id",
+                    "required": "VALUE_OPTIONAL",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "quizzes",
+            "required": "",
+            "default": ""
+        }
+    }
+}
