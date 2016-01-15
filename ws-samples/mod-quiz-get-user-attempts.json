@@ -1,0 +1,69 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_quiz_get_user_attempts",
+    "description": "Return a list of attempts for the given quiz and user.",
+    "type": "read",
+    "capabilities": "mod/quiz:view",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": false,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_quiz_get_quizzes_by_courses",
+    "basictest": true,
+    "testtemplate": "",
+    "parameters": {
+        "quizid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "quiz instance id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "userid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "user id",
+                "required": "VALUE_DEFAULT",
+                "default": 0,
+                "allownull": ""
+            }
+        },
+        "status": {
+            "external_value": {
+                "type": "PARAM_ALPHA",
+                "description": "quiz status: all, finished or unfinished",
+                "required": "VALUE_DEFAULT",
+                "default": "'finished'",
+                "allownull": ""
+            }
+        },
+        "includepreviews": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "whether to include previews or not",
+                "required": "VALUE_DEFAULT",
+                "default": "false",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and the list of attempts",
+    "returns": {
+        "attempts": {
+            "type": "external_multiple_structure",
+            "external_single_structure": [
+                {
+                    "from": "xmldb",
+                    "file": "mod/quiz/db/install.xml",
+                    "table": "quiz_attempts"
+                }
+            ],
+            "description": "attempts",
+            "required": "",
+            "default": ""
+        }
+    }
+}

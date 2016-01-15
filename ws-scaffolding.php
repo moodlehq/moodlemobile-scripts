@@ -19,7 +19,7 @@
  * How to use:
  *  php ws-scaffolding.php ws.json
  *
- * ws.json is a file containing the new Web Service information and settings, see ws-dist.json as an example
+ * ws.json is a file containing the new Web Service information and settings, see ws-samples directory for examples
  */
 
 // Check we are in CLI.
@@ -48,7 +48,7 @@ function print_external_value($data) {
 
     if (!empty($data->required)) {
         $s .= ", $data->required";
-        if (!empty($data->default)) {
+        if (!empty($data->default) or (isset($data->default) and ($data->default === 0 or $data->default === "0" or $data->default === false))) {
             $s .= ", $data->default";
         }
     }
@@ -100,6 +100,10 @@ if (!file_exists($externalfile) and !file_exists($externalfileold)) {
     file_put_contents($externalfile, $lines);
 }
 
+if (file_exists($externalfileold)) {
+    $externalfile = $externalfileold;
+}
+
 $servicesfile = "$data->moodlebasepath/mod/$pluginname/db/services.php";
 if (!file_exists($servicesfile)) {
     output("Creating new services file in: $servicesfile");
@@ -114,21 +118,42 @@ if (!file_exists($servicesfile)) {
     file_put_contents($servicesfile, $lines);
 }
 
-if (file_exists($externalfileold)) {
-    $externalfile = $externalfileold;
+// Use the survey file as template.
+$testfile = "$data->moodlebasepath/mod/$pluginname/tests/external_test.php";
+$testfileold = "$data->moodlebasepath/mod/$pluginname/tests/externallib_test.php";
+if (!file_exists($testfile)  and !file_exists($testfileold)) {
+    output("Creating new test file in: $testfile");
+    $lines = file("$data->moodlebasepath/mod/survey/tests/externallib_test.php");
+    $lines = implode("", array_splice($lines, 0, 69)) . "\n}\n";
+
+    $lines = str_replace("survey", $pluginname, $lines);
+    $lines = str_replace("Survey", ucfirst($pluginname), $lines);
+    $lines = str_replace("Moodle 3.0", $data->since, $lines);
+    $lines = str_replace("2015 Juan Leyva <juan@moodle.com>", $data->copyright, $lines);
+
+    file_put_contents($testfile, $lines);
 }
 
+if (file_exists($testfileold)) {
+    $testfile = $testfileold;
+}
+
+
+
 // Check bump versions.
+define('MOODLE_INTERNAL', true);
+define('MATURITY_ALPHA', true);
+define('MATURITY_BETA', true);
+
 if (!empty($data->bumpversion)) {
-    define('MOODLE_INTERNAL', true);
-    define('MATURITY_ALPHA', true);
-    define('MATURITY_BETA', true);
 
     require_once($data->moodlebasepath . "/version.php");
     $newversion = $version + 0.01;
     output("Moodle version bumped: from ". number_format($version, 2, '.', '') . " to $newversion");
     file_replace_contents($data->moodlebasepath . "/version.php", number_format($version, 2, '.', ''), $newversion);
+}
 
+if (!empty($data->bumpmodversion)) {
     $plugin = new stdClass();
     require_once($data->moodlebasepath . "/mod/$pluginname/version.php");
     $newversion = $plugin->version + 1;
@@ -139,7 +164,13 @@ if (!empty($data->bumpversion)) {
 // Include new function into the mobile service.
 if (!empty($data->addtothemobileservice)) {
     $serviceslib = $data->moodlebasepath . "/lib/db/services.php";
-    file_replace_contents($serviceslib, "mod_imscp_get_imscps_by_courses',", "mod_imscp_get_imscps_by_courses',\n            '$data->name',");
+
+    if (empty($data->addafter)) {
+        $data->addafter = "core_message_send_instant_messages";
+    }
+
+    file_replace_contents($serviceslib, "$data->addafter',", "$data->addafter',\n            '$data->name',");
+
     output("Function added to the mobile service");
 }
 
@@ -152,7 +183,7 @@ $template = "    'mod_${pluginname}_${function}' => array(
         'capabilities'  => '$data->capabilities'
     ),";
 
-file_replace_contents($servicesfile, ");", $template . "\n);");
+file_replace_contents($servicesfile, ");", "\n" . $template . "\n);");
 
 // Create the external functions.
 
@@ -162,13 +193,42 @@ $parameterslist = "";
 $parametersarr = "";
 
 foreach ($data->parameters as $parameter => $pdata) {
-    $parametersarr = "\n            '$parameter' => \$$parameter,";
-    if ($pdata->type == "external_multiple_structure") {
-        $parametersdoc .= "\n     * @param array \$${parameter} $pdata->description";
+    $parametersarr .= "\n            '$parameter' => \$$parameter,";
 
-        if (!empty($parametersdec)) {
-            $parametersdec .= " ,";
+    if (!empty($parametersdec)) {
+        $parametersdec .= ", ";
+    }
+
+    if (!empty($pdata->external_value)) {
+
+        switch ($pdata->external_value->type) {
+            case "PARAM_INT":
+                $paramtype = 'int';
+                break;
+            case "PARAM_FLOAT":
+                $paramtype = 'float';
+                break;
+            case "PARAM_BOOL":
+                $paramtype = 'bool';
+                break;
+            default:
+                $paramtype = 'string';
         }
+
+        $parametersdoc .= "\n     * @param $paramtype \$${parameter} " . $pdata->external_value->description;
+        $parametersdec .= "\$${parameter}";
+        if ($pdata->external_value->default or
+                (isset($pdata->external_value->default) and
+                ($pdata->external_value->default === false or $pdata->external_value->default === 0 or
+                $pdata->external_value->default === "0"))) {
+
+            $parametersdec .= " = " . $pdata->external_value->default;
+        }
+
+        $parameterslist .= "                '$parameter' => " . print_external_value($pdata->external_value). "\n";
+
+    } else if ($pdata->type == "external_multiple_structure") {
+        $parametersdoc .= "\n     * @param array \$${parameter} $pdata->description";
 
         $parametersdec .= "\$${parameter}";
         if ($pdata->default) {
@@ -205,7 +265,7 @@ $parameterstpl = "
     public static function {$function}_parameters() {
         return new external_function_parameters (
             array(
-                $parameterslist
+$parameterslist
             )
         );
     }
@@ -216,15 +276,15 @@ $functiontpl = "
     /**
      * $data->description
      * $parametersdoc
-     * @return array of surveys details
+     * @return $data->returndescription
      * @since $data->since
      */
     public static function $function($parametersdec) {
 
         \$warnings = array();
 
-        \$params = { $parametersarr
-        };
+        \$params = array( $parametersarr
+        );
         \$params = self::validate_parameters(self::${function}_parameters(), \$params);
 
         \$result = array();
@@ -234,13 +294,28 @@ $functiontpl = "
     }
 ";
 
-$returnlist = "";
+$parameterslist = "";
 foreach ($data->returns as $parameter => $pdata) {
-    if ($pdata->type == "external_multiple_structure") {
 
-        $parameterslist = "'$parameter' => new external_multiple_structure(\n";
+    if (!empty($pdata->type) and $pdata->type == "external_multiple_structure") {
 
-        if (!empty($pdata->external_single_structure)) {
+        $parameterslist .= "                '$parameter' => new external_multiple_structure(\n";
+
+        if (!empty($pdata->external_value)) {
+            $parameterslist .= "                    " . print_external_value($pdata->external_value);
+
+            if (!empty($pdata->description) or !empty($pdata->required) or !empty($pdata->default)) {
+                $required = "";
+                if (!empty($pdata->required)) {
+                    $required = ", $pdata->required";
+                    if (!empty($pdata->default)) {
+                        $required .= ", $pdata->default";
+                    }
+                }
+                $parameterslist .= "\n                    ' $pdata->description'$required),\n";
+            }
+
+        } else if (!empty($pdata->external_single_structure)) {
             $parameterslist .= "                    new external_single_structure(
                         array(";
 
@@ -277,11 +352,18 @@ foreach ($data->returns as $parameter => $pdata) {
                         $parameterslist .= "\n                            '$fieldname' => " . print_external_value($externaldata);
                     }
                 }
+                if (!empty($singlestructure->name)) {
+                    $parameterslist .= "\n                            '$singlestructure->name' => " . print_external_value($singlestructure);
+                }
             }
             $parameterslist .= "\n                        )";
             $parameterslist .= "\n                    )";
             $parameterslist .= "\n                ),";
         }
+    } else if (!empty($pdata->external_value)) {
+
+        $parameterslist .= "                '$parameter' => " . print_external_value($pdata->external_value) . "\n";
+
     }
 }
 
@@ -296,7 +378,7 @@ $returnstpl = "
     public static function ${function}_returns() {
         return new external_single_structure(
             array(
-                $parameterslist
+$parameterslist
                 'warnings' => new external_warnings(),
             )
         );
@@ -305,6 +387,60 @@ $returnstpl = "
 
 file_replace_contents($externalfile, "\n}\n", $parameterstpl . $functiontpl . $returnstpl . "\n}\n");
 
+if (!empty($data->testtemplate)) {
+    list ($file, $function) = explode(":", $data->testtemplate);
+
+    $test = file_get_contents("$data->moodlebasepath/$file");
+    $teststart = strpos($test, "    public function $function");
+
+    if (!empty($teststart)) {
+        $test = substr($test, $teststart);
+        preg_match('/\n    }\n/', $test, $matches, PREG_OFFSET_CAPTURE);
+        $endfunction = $matches[0][1];
+
+        if (!empty($endfunction)) {
+            $test = substr($test, 0, $endfunction + 7);
+            $function = str_replace("survey", $pluginname, $function);
+            $test = str_replace("survey", $pluginname, $test);
+            $test = str_replace("Survey", ucfirst($pluginname), $test);
+
+            $testheader = "
+    /**
+     * Test $function
+     */
+";
+
+            file_replace_contents($testfile, "\n}\n", $testheader . $test . "\n}\n");
+            output("Tempalte test function added");
+        }
+    }
+}
+
+if (!empty($data->basictest)) {
+
+    $component = "${type}_${pluginname}";
+
+    $basictest = "
+    /**
+     * Test $function
+     */
+    public function test_${function}() {
+
+        \$result = ${component}_external::$function();
+        \$result = external_api::clean_returnvalue(${component}_external::${function}_returns(), \$result);
+
+        try {
+            ${component}_external::${function}();
+            \$this->fail('Exception expected due to missing capability.');
+        } catch (required_capability_exception \$e) {
+            \$this->assertEquals('nopermissions', \$e->errorcode);
+        }
+
+    }
+";
+
+    file_replace_contents($testfile, "\n}\n", $basictest . "\n}\n");
+}
 
 // Exit 0 mean success.
 exit(0);

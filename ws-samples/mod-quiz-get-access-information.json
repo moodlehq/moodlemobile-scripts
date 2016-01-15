@@ -1,0 +1,140 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_quiz_get_access_information",
+    "description": "Return access information for a given quiz.",
+    "type": "read",
+    "capabilities": "mod/quiz:view",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": false,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_quiz_get_quizzes_by_courses",
+    "basictest": true,
+    "testtemplate": "",
+    "parameters": {
+        "quizid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "quiz instance id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and the access information",
+    "returns": {
+        "canattempt": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "Whether the user can do the quiz or not.",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "canmanage": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "Whether the user can edit the quiz settings or not.",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "canpreview": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "Whether the user can preview the quiz or not.",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "canreviewmyattempts": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "Whether the users can review their previous attempts or not.",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "canviewreports": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "Whether the user can view the quiz reports or not.",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "endtime": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "When the attempt must be submitted (determined by rules).",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "isfinished": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "Whether there is no way the user will ever be allowed to attempt.",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "ispreflightcheckrequired": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "whether a check is required before the user starts/continues his attempt.",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "accessrules": {
+            "type": "external_multiple_structure",
+            "external_value": {
+                "type": "PARAM_TEXT",
+                "description": "rule description",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            },
+            "description": "list of rules",
+            "required": "",
+            "default": ""
+        },
+        "preventaccessreasons": {
+            "type": "external_multiple_structure",
+            "external_value": {
+                "type": "PARAM_TEXT",
+                "description": "access restriction description",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            },
+            "description": "list of reasons",
+            "required": "",
+            "default": ""
+        },
+        "preventnewattemptreasons": {
+            "type": "external_multiple_structure",
+            "external_value": {
+                "type": "PARAM_TEXT",
+                "description": "access restriction description",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            },
+            "description": "list of reasons",
+            "required": "",
+            "default": ""
+        }
+    }
+}

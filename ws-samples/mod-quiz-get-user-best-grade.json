@@ -1,0 +1,56 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_quiz_get_user_best_grade",
+    "description": "Get the best current grade for the given user on a quiz.",
+    "type": "read",
+    "capabilities": "mod/quiz:view",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": false,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_quiz_get_quizzes_by_courses",
+    "basictest": true,
+    "testtemplate": "",
+    "parameters": {
+        "quizid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "quiz instance id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "userid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "user id",
+                "required": "VALUE_DEFAULT",
+                "default": "0",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and the grade information",
+    "returns": {
+        "hasgrade": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "Whether the user has a grade on the given quiz.",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "grade": {
+            "external_value": {
+                "type": "PARAM_FLOAT",
+                "description": "The grade (only if the user has a grade).",
+                "required": "VALUE_OPTIONAL",
+                "default": "",
+                "allownull": ""
+            }
+        }
+    }
+}

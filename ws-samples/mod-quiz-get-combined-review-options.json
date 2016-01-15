@@ -1,0 +1,86 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_quiz_get_combined_review_options",
+    "description": "Combines the review options from a number of different quiz attempts.",
+    "type": "read",
+    "capabilities": "mod/quiz:view",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": false,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_quiz_get_quizzes_by_courses",
+    "basictest": true,
+    "testtemplate": "",
+    "parameters": {
+        "quizid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "quiz instance id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "userid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "user id (empty for current user)",
+                "required": "VALUE_DEFAULT",
+                "default": "0",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and the review options",
+    "returns": {
+        "someoptions": {
+            "type": "external_multiple_structure",
+            "external_single_structure": [
+                {
+                    "name": "name",
+                    "type": "PARAM_ALPHANUMEXT",
+                    "description": "option name",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "value",
+                    "type": "PARAM_RAW",
+                    "description": "option value",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "some options",
+            "required": "",
+            "default": ""
+        },
+        "alloptions": {
+            "type": "external_multiple_structure",
+            "external_single_structure": [
+                {
+                    "name": "name",
+                    "type": "PARAM_ALPHANUMEXT",
+                    "description": "option name",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "value",
+                    "type": "PARAM_RAW",
+                    "description": "option value",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "all options",
+            "required": "",
+            "default": ""
+        }
+    }
+}

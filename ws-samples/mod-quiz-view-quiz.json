@@ -1,0 +1,37 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_quiz_view_quiz",
+    "description": "Trigger the course module viewed event and update the module completion status.",
+    "type": "write",
+    "capabilities": "mod/quiz:view",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": false,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_quiz_get_quizzes_by_courses",
+    "testtemplate": "mod/survey/tests/externallib_test.php:test_view_survey",
+    "parameters": {
+        "quizid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "quiz instance id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and status result",
+    "returns": {
+        "status": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "status: true if success",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        }
+    }
+}
