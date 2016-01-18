@@ -27,6 +27,7 @@ define("MOODLE_INTERNAL", 1);
 
 define("JSON_FILE_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/en.json");
 define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-local_moodlemobileapp/lang/en/local_moodlemobileapp.php");
+define("MOODLE_STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle-langpacks/en");
 
 $jsonstrings = (array) json_decode(file_get_contents(JSON_FILE_PATH), true);
 
@@ -67,6 +68,27 @@ foreach ($finalstrings as $key => $value) {
     if (strpos($key, 'mm.core.country') !== false) {
         continue;
     }
+    // Ommit modules already translated files.
+    if (strpos($key, 'mma.mod_') !== false) {
+        list($comp, $mod, $id) = explode(".", $key);
+        list($t, $modname) = explode("_", $mod);
+        $string = array();
+        include(MOODLE_STRING_FILES_PATH . "/" . $modname . ".php");
+        if (isset($string[$id]) and $string[$id] == $value) {
+            echo "$modname string with id $id exists \n";
+            continue;
+        }
+    }
+    if (strpos($key, 'mm.core.') !== false) {
+        list($comp, $mod, $id) = explode(".", $key);
+        $string = array();
+        include(MOODLE_STRING_FILES_PATH . "/moodle.php");
+        if (isset($string[$id]) and $string[$id] == $value) {
+            echo "string with id $id exists \n";
+            continue;
+        }
+    }
+
     $value = str_replace("'", "\'", $value);
     $templatefile .= '$string' . "['$key'] = '$value';\n";
 }

@@ -33,7 +33,7 @@ define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/mood
 
 $moodlestringfiles = array('my.php', 'moodle.php', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
                             'feedback.php', 'repository_coursefiles.php', 'forum.php', 'survey.php', 'lti.php', 'enrol_self.php',
-                            'search.php');
+                            'search.php', 'scorm.php');
 $numfound = 0;
 $numnotfound = 0;
 $notfound = array();
