@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Script for documenting in Wiki format new Web Services added in MOODLE_LATEST_VERSION.
+ * Script for ordering/fixing the Web Services API documentation.
  */
 
 // Check we are in CLI.
@@ -26,17 +26,60 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("CLI_SCRIPT", 1);
 define("MOODLE_INTERNAL", 1);
 
-define("MOODLE_PREVIOUS_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_30/moodle");
 define("MOODLE_LATEST_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_master/moodle");
-define("MOODLE_LATEST_VERSION_NUMBER", "3.1");
-
-if (!file_exists(MOODLE_LATEST_VERSION)) {
-    exit("Invalid path" . MOODLE_LATEST_VERSION);
-}
+define("DOCUMENTATION_PATH", "doc.txt");
 
 require_once(MOODLE_LATEST_VERSION . '/config.php');
-require_once($CFG->libdir . '/adminlib.php');
 
+$doc = file_get_contents(DOCUMENTATION_PATH);
+
+$doc = str_replace(array("\n", "\r"), '', $doc);
+$lines = explode("|-", $doc);
+
+$functions = array();
+foreach ($lines as $line) {
+    $els = explode("|", $line);
+
+    $fname = trim($els[3]);
+    $fname = str_replace('()', '', $fname);
+    $oldfname = $els[6];
+    $version = $els[9];
+    $description = $els[12];
+    $issue = $els[14];
+
+    $fnameels = explode('_', $fname);
+    $component = $fnameels[0] . '_' . $fnameels[1];
+
+    $functions[$fname] = array(
+        'fname' => $fname,
+        'oldfname' => $oldfname,
+        'version' => $version,
+        'description' => $description,
+        'issue' => $issue,
+        'issue' => $issue,
+        'component' => $component,
+    );
+}
+
+$orderedfunctions = array_keys($functions);
+sort($orderedfunctions);
+
+foreach ($orderedfunctions as $fname) {
+
+    $oldfname = $functions[$fname]['oldfname'];
+    $version = $functions[$fname]['version'];
+    $description = $functions[$fname]['description'];
+    $issue = $functions[$fname]['issue'];
+    $component = $functions[$fname]['component'];
+
+    echo '
+|-
+| ' . $component . '
+| style="background:#D4FFDF;" | ' . $fname . ' || style="background:#D4FFDF;" | ' . $oldfname . ' || style="background:#D4FFDF;" | ' . $version . ' || style="background:#D4FFDF;" | ' . $description . ' || ' . $issue;
+
+}
+
+echo "\n\n\n MISSING DETECTED FUNCTIONS HERE \n\n\n";
 
 // Function to return all the external functions in db/services.php.
 function get_external_functions($path) {
@@ -71,11 +114,9 @@ function get_external_functions($path) {
     return $externalfunctions;
 }
 
-$previousfunctions = get_external_functions(MOODLE_PREVIOUS_VERSION);
 $latestfunctions = get_external_functions(MOODLE_LATEST_VERSION);
 
-// Calculate new functions.
-$newfunctions = array_diff(array_keys($latestfunctions), array_keys($previousfunctions));
+$newfunctions = array_diff(array_keys($latestfunctions), $orderedfunctions);
 sort($newfunctions);
 
 foreach ($newfunctions as $fname) {
@@ -84,8 +125,5 @@ foreach ($newfunctions as $fname) {
 echo '
 |-
 | ' . $classname . '
-| style="background:#D4FFDF;" | ' . $fname . ' || style="background:#D4FFDF;" | || style="background:#D4FFDF;" | ' . MOODLE_LATEST_VERSION_NUMBER . ' || style="background:#D4FFDF;" | ' . $description . ' ||';
+| style="background:#D4FFDF;" | ' . $fname . ' || style="background:#D4FFDF;" | || style="background:#D4FFDF;" | 3.x || style="background:#D4FFDF;" | ' . $description . ' ||';
 }
-
-// Exit 0 mean success.
-exit(0);
