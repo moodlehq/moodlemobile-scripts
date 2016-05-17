@@ -1,0 +1,38 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_assign_view_submission_status",
+    "description": "Trigger the submission status viewed event.",
+    "type": "write",
+    "capabilities": "mod/assign:view",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": true,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_assign_view_grading_table",
+    "basictest": false,
+    "testtemplate": "mod/assign/tests/externallib_test.php:test_view_grading_table",
+    "parameters": {
+        "assignid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "assign instance id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and status result",
+    "returns": {
+        "status": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "status: true if success",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        }
+    }
+}

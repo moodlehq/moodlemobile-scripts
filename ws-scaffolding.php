@@ -225,7 +225,7 @@ foreach ($data->parameters as $parameter => $pdata) {
             $parametersdec .= " = " . $pdata->external_value->default;
         }
 
-        $parameterslist .= "                '$parameter' => " . print_external_value($pdata->external_value). "\n";
+        $parameterslist .= "\n                '$parameter' => " . print_external_value($pdata->external_value);
 
     } else if ($pdata->type == "external_multiple_structure") {
         $parametersdoc .= "\n     * @param array \$${parameter} $pdata->description";
@@ -235,10 +235,22 @@ foreach ($data->parameters as $parameter => $pdata) {
             $parametersdec .= " = array()";
         }
 
-        $parameterslist = "'$parameter' => new external_multiple_structure(\n";
+        $parameterslist .= "\n                '$parameter' => new external_multiple_structure(\n";
 
         if (!empty($pdata->external_value)) {
             $parameterslist .= '                    ' . print_external_value($pdata->external_value);
+        } else if (!empty($pdata->external_single_structure)) {
+            $parameterslist .= "                    new external_single_structure(
+                        array(";
+
+            foreach ($pdata->external_single_structure as $singlestructure) {
+                // Read from XMLDB.
+                if (!empty($singlestructure->name)) {
+                    $parameterslist .= "\n                            '$singlestructure->name' => " . print_external_value($singlestructure);
+                }
+            }
+            $parameterslist .= "\n                        )";
+            $parameterslist .= "\n                    )";
         }
 
         if (!empty($pdata->description) or !empty($pdata->required) or !empty($pdata->default)) {
@@ -249,7 +261,7 @@ foreach ($data->parameters as $parameter => $pdata) {
                     $required .= ", $pdata->default";
                 }
             }
-            $parameterslist .= "\n                    '$pdata->description'$required";
+            $parameterslist .= ",\n                    '$pdata->description'$required";
         }
         $parameterslist .= "\n                ),";
     }
@@ -264,8 +276,7 @@ $parameterstpl = "
      */
     public static function {$function}_parameters() {
         return new external_function_parameters (
-            array(
-$parameterslist
+            array($parameterslist
             )
         );
     }
@@ -297,12 +308,20 @@ $functiontpl = "
 $parameterslist = "";
 foreach ($data->returns as $parameter => $pdata) {
 
-    if (!empty($pdata->type) and $pdata->type == "external_multiple_structure") {
+    $ismultiple = !empty($pdata->type) and $pdata->type == "external_multiple_structure";
+    $issingle = !empty($pdata->external_single_structure);
 
-        $parameterslist .= "                '$parameter' => new external_multiple_structure(\n";
+    if ($ismultiple or $issingle) {
+
+        if ($ismultiple) {
+            $parameterslist .= "\n                '$parameter' => new external_multiple_structure(";
+        } else if ($issingle) {
+            $parameterslist .= "\n                '$parameter' => new external_single_structure(
+                        array(";
+        }
 
         if (!empty($pdata->external_value)) {
-            $parameterslist .= "                    " . print_external_value($pdata->external_value);
+            $parameterslist .= "\n                    " . print_external_value($pdata->external_value);
 
             if (!empty($pdata->description) or !empty($pdata->required) or !empty($pdata->default)) {
                 $required = "";
@@ -316,9 +335,10 @@ foreach ($data->returns as $parameter => $pdata) {
             }
 
         } else if (!empty($pdata->external_single_structure)) {
-            $parameterslist .= "                    new external_single_structure(
+            if ($ismultiple) {
+                $parameterslist .= "                    new external_single_structure(
                         array(";
-
+            }
             foreach ($pdata->external_single_structure as $singlestructure) {
                 // Read from XMLDB.
                 if (!empty($singlestructure->from) && $singlestructure->from == 'xmldb') {
@@ -356,13 +376,23 @@ foreach ($data->returns as $parameter => $pdata) {
                     $parameterslist .= "\n                            '$singlestructure->name' => " . print_external_value($singlestructure);
                 }
             }
+
             $parameterslist .= "\n                        )";
-            $parameterslist .= "\n                    )";
+            if (!empty($pdata->description) or !empty($pdata->required) or !empty($pdata->default)) {
+                $required = "";
+                if (!empty($pdata->required)) {
+                    $required = ", $pdata->required";
+                    if (!empty($pdata->default)) {
+                        $required .= ", $pdata->default";
+                    }
+                }
+                $parameterslist .= ", ' $pdata->description'$required";
+            }
             $parameterslist .= "\n                ),";
         }
     } else if (!empty($pdata->external_value)) {
 
-        $parameterslist .= "                '$parameter' => " . print_external_value($pdata->external_value) . "\n";
+        $parameterslist .= "\n                '$parameter' => " . print_external_value($pdata->external_value);
 
     }
 }
@@ -377,8 +407,7 @@ $returnstpl = "
      */
     public static function ${function}_returns() {
         return new external_single_structure(
-            array(
-$parameterslist
+            array($parameterslist
                 'warnings' => new external_warnings(),
             )
         );

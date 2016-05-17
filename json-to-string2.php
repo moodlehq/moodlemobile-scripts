@@ -27,7 +27,7 @@ define("MOODLE_INTERNAL", 1);
 
 define("JSON_FILE_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/en.json");
 define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-local_moodlemobileapp/lang/en/local_moodlemobileapp.php");
-define("MOODLE_STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle-langpacks/en");
+define("MOODLE_STRING_FILES_PATH", "/Users/juanleyvadelgado/www/m/stable_master");
 
 $jsonstrings = (array) json_decode(file_get_contents(JSON_FILE_PATH), true);
 
@@ -73,18 +73,28 @@ foreach ($finalstrings as $key => $value) {
         list($comp, $mod, $id) = explode(".", $key);
         list($t, $modname) = explode("_", $mod);
         $string = array();
-        include(MOODLE_STRING_FILES_PATH . "/" . $modname . ".php");
+        include(MOODLE_STRING_FILES_PATH . "/mod/" . $modname . "/lang/en/" . $modname . ".php");
         if (isset($string[$id]) and $string[$id] == $value) {
-            echo "$modname string with id $id exists \n";
+            echo "$modname string with id $key exists \n";
             continue;
         }
     }
     if (strpos($key, 'mm.core.') !== false) {
         list($comp, $mod, $id) = explode(".", $key);
         $string = array();
-        include(MOODLE_STRING_FILES_PATH . "/moodle.php");
+        include(MOODLE_STRING_FILES_PATH . "/lang/en/moodle.php");
         if (isset($string[$id]) and $string[$id] == $value) {
-            echo "string with id $id exists \n";
+            echo "string with id $key exists \n";
+            continue;
+        }
+    }
+
+    if (strpos($key, 'mma.messages.') !== false) {
+        list($comp, $mod, $id) = explode(".", $key);
+        $string = array();
+        include(MOODLE_STRING_FILES_PATH . "/lang/en/message.php");
+        if (isset($string[$id]) and $string[$id] == $value) {
+            echo "string with id $key exists \n";
             continue;
         }
     }

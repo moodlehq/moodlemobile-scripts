@@ -1,0 +1,80 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_quiz_process_attempt",
+    "description": "Process responses during an attempt at a quiz and also deals with attempts finishing.",
+    "type": "write",
+    "capabilities": "mod/quiz:attempt",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": false,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_quiz_get_quizzes_by_courses",
+    "basictest": true,
+    "testtemplate": "",
+    "parameters": {
+        "attemptid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "attempt id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "data": {
+            "type": "external_multiple_structure",
+            "external_single_structure": [
+                {
+                    "name": "name",
+                    "type": "PARAM_ALPHANUMEXT",
+                    "description": "data name",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "value",
+                    "type": "PARAM_RAW",
+                    "description": "data value",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "the data to be saved",
+            "required": "",
+            "default": ""
+        },
+        "finishattempt": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "whether to finish or not the attempt",
+                "required": "VALUE_OPTIONAL",
+                "default": "false",
+                "allownull": ""
+            }
+        },
+        "timeup": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "whether the WS was called by a timer when the time is up",
+                "required": "VALUE_OPTIONAL",
+                "default": "false",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and the attempt state after the processing",
+    "returns": {
+        "state": {
+            "external_value": {
+                "type": "PARAM_ALPHANUMEXT",
+                "description": "state: the new attempt state: inprogress, finished, overdue, abandoned",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        }
+    }
+}

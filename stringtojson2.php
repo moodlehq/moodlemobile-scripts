@@ -84,6 +84,7 @@ if (!empty($string)) {
             }
         }
         file_put_contents($path, str_replace('\/', '/', json_encode($strings, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)));
+        echo "File $path created\n";
     }
 }
 

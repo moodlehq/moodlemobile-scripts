@@ -1,0 +1,94 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_quiz_get_attempt_summary",
+    "description": "Returns a summary of a quiz attempt before it is submitted.",
+    "type": "read",
+    "capabilities": "mod/quiz:attempt",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": false,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_quiz_get_quizzes_by_courses",
+    "basictest": true,
+    "testtemplate": "",
+    "parameters": {
+        "attemptid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "attempt id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "preflightdata": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "preflight required data (like passwords)",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and the attempt summary data for each question",
+    "returns": {
+        "questions": {
+            "type": "external_multiple_structure",
+            "external_single_structure": [
+                {
+                    "name": "slot",
+                    "type": "PARAM_INT",
+                    "description": "slot number",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "number",
+                    "type": "PARAM_INT",
+                    "description": "question sequencial number",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "state",
+                    "type": "PARAM_INT",
+                    "description": "the state where the question is in",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "status",
+                    "type": "PARAM_RAW",
+                    "description": "current status of the question",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "flagged",
+                    "type": "PARAM_BOOL",
+                    "description": "whether the question is flagged or not",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "mark",
+                    "type": "PARAM_RAW",
+                    "description": "the mark awarded",
+                    "required": "VALUE_OPTIONAL",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "questions",
+            "required": "",
+            "default": ""
+        }
+    }
+}

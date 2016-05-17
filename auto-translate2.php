@@ -28,12 +28,15 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("MOODLE_INTERNAL", 1);
 
 define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle-langpacks/");
+define("BRANCH", "MOODLE_30_STABLE");
 define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/");
 define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/");
 
+exec("cd ".STRING_FILES_PATH."; git checkout ".BRANCH."; git pull");
+
 $moodlestringfiles = array('my.php', 'moodle.php', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
                             'feedback.php', 'repository_coursefiles.php', 'forum.php', 'survey.php', 'lti.php', 'enrol_self.php',
-                            'search.php', 'scorm.php');
+                            'search.php', 'scorm.php', 'message.php', 'wiki.php');
 $numfound = 0;
 $numnotfound = 0;
 $notfound = array();
@@ -82,11 +85,20 @@ foreach ($moodlestringfiles as $stringfilename) {
             }
             list($type, $component, $plainid) = explode('.', $id);
 
-            if (empty($jsonstrings[$id]) and !empty($string[$plainid])) {
+            // We are translating and addon that is a Moodle module.
+            $ismoodleplugin = false;
+            if (strpos($component, 'mod_') !== false) {
+                list($mod, $modname) = explode('_', $component);
+                if ($modname == str_replace('.php', '', $stringfilename)) {
+                    $ismoodleplugin = true;
+                }
+            }
+
+            if (!empty($string[$plainid]) and (empty($jsonstrings[$id]) or $ismoodleplugin)) {
                 print("$id found -> " . $string[$plainid] . " \n");
-                $jsonstrings[$id] = str_replace('{$a}', '{{$a}}',$string[$plainid]);
+                $jsonstrings[$id] = str_replace('{$a}', '{{$a}}', $string[$plainid]);
                 // Prevent double.
-                $jsonstrings[$id] = str_replace('{{{$a}}}', '{{$a}}',$jsonstrings[$id]);
+                $jsonstrings[$id] = str_replace('{{{$a}}}', '{{$a}}', $jsonstrings[$id]);
                 $found = true;
                 $numfound++;
             } else if (empty($jsonstrings[$id])) {
@@ -122,10 +134,14 @@ foreach ($moodlestringfiles as $stringfilename) {
                 }
             }
 
-            $jsonstrings = file_get_contents($path);
-            $jsonstrings = (array) json_decode($jsonstrings);
+            if (file_exists($path)) {
+                $jsonstrings = file_get_contents($path);
+                $jsonstrings = (array) json_decode($jsonstrings);
+                $finalstrings = array_replace($jsonstrings, $strings);
+            } else {
+                $finalstrings = $strings;
+            }
 
-            $finalstrings = array_replace($jsonstrings, $strings);
             ksort($finalstrings);
             file_put_contents($path, str_replace('\/', '/', json_encode($finalstrings, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)));
         }

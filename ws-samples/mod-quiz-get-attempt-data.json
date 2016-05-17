@@ -1,0 +1,106 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_quiz_get_attempt_data",
+    "description": "Returns information for the given attempt page for a quiz attempt in progress.",
+    "type": "read",
+    "capabilities": "mod/quiz:attempt",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": false,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_quiz_get_quizzes_by_courses",
+    "basictest": true,
+    "testtemplate": "",
+    "parameters": {
+        "attemptid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "attempt id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "page": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "page number",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "preflightdata": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "preflight required data (like passwords)",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and the attempt data, next page, message and questions",
+    "returns": {
+        "attempt": {
+            "type": "external_multiple_structure",
+            "external_value": {
+                "type": "PARAM_TEXT",
+                "description": "access message",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            },
+            "description": "attempt basic data",
+            "required": "",
+            "default": ""
+        },
+        "messages": {
+            "type": "external_multiple_structure",
+            "external_value": {
+                "type": "PARAM_TEXT",
+                "description": "access message",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            },
+            "description": "access messages",
+            "required": "",
+            "default": ""
+        },
+        "nextpage": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "next page number",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "questions": {
+            "type": "external_multiple_structure",
+            "external_single_structure": [
+                {
+                    "name": "slot",
+                    "type": "PARAM_INT",
+                    "description": "slot number",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "html",
+                    "type": "PARAM_RAW",
+                    "description": "the question rendered",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "questions",
+            "required": "",
+            "default": ""
+        }
+    }
+}

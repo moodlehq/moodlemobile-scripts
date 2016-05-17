@@ -1,0 +1,302 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_assign_get_submission_status",
+    "description": "Returns information about an assignment submission status for a given user.",
+    "type": "read",
+    "capabilities": "mod/assign:view",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": true,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_assign_get_submissions",
+    "basictest": true,
+    "testtemplate": "",
+    "parameters": {
+        "assignid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "assignment instance id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "userid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "user id (empty for current user)",
+                "required": "VALUE_DEFAULT",
+                "default": "0",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and grading, status, feedack and previous attempts information",
+    "returns": {
+        "gradingsummary": {
+            "external_single_structure": [
+                {
+                    "name": "participantcount",
+                    "type": "PARAM_INT",
+                    "description": "The number of users who can submit to this assignment.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "submissiondraftscount",
+                    "type": "PARAM_INT",
+                    "description": "The number of submissions in draft status.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "submissiondraftscount",
+                    "type": "PARAM_INT",
+                    "description": "The number of submissions in draft status.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "submissionsenabled",
+                    "type": "PARAM_BOOL",
+                    "description": "Whether submissions are enabled or not.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "submissionssubmittedcount",
+                    "type": "PARAM_INT",
+                    "description": "The number of submissions in submitted status.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "submissionsneedgradingcount",
+                    "type": "PARAM_INT",
+                    "description": "The number of submissions that need grading.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "warnofungroupedusers",
+                    "type": "PARAM_BOOL",
+                    "description": "Whether we need to warn people that there are users without groups.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "Grading information.",
+            "required": "VALUE_OPTIONAL",
+            "default": ""
+        },
+        "status": {
+            "external_single_structure": [
+                {
+                    "from": "xmldb",
+                    "file": "mod/assign/db/install.xml",
+                    "table": "assign_submission"
+                },
+                {
+                    "name": "submission",
+                    "type": "PARAM_INT",
+                    "description": "The submission object.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "from": "xmldb",
+                    "file": "mod/assign/db/install.xml",
+                    "table": "assign_grades"
+                },
+                {
+                    "name": "teamsubmission",
+                    "type": "PARAM_INT",
+                    "description": "The team(group) submission object (for group submissions only).",
+                    "required": "VALUE_OPTIONAL",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "submissiongroup",
+                    "type": "PARAM_INT",
+                    "description": "The submission group id (for group submissions only).",
+                    "required": "VALUE_OPTIONAL",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "submissiongroupmemberswhoneedtosubmit",
+                    "type": "PARAM_INT",
+                    "description": "List of users who still need to submit (for group submissions only).",
+                    "required": "VALUE_OPTIONAL",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "submissionsenabled",
+                    "type": "PARAM_BOOL",
+                    "description": "Whether submissions are enabled or not.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "locked",
+                    "type": "PARAM_BOOL",
+                    "description": "Whether new submissions are locked.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "graded",
+                    "type": "PARAM_BOOL",
+                    "description": "Whether the submission is graded.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "submissiondata",
+                    "type": "PARAM_IN",
+                    "description": "Assignment submission plugins data.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "canedit",
+                    "type": "PARAM_BOOL",
+                    "description": "Whether the user can edit the current submission.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "cansubmit",
+                    "type": "PARAM_BOOL",
+                    "description": "Whether the user can submit.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "extensionduedate",
+                    "type": "PARAM_INT",
+                    "description": "Extension due date.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "blindmarking",
+                    "type": "PARAM_BOOL",
+                    "description": "Whether blind marking is enabled.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "gradingstatus",
+                    "type": "PARAM_ALPHANUMEXT",
+                    "description": "Grading status.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "usergroups",
+                    "type": "PARAM_INT",
+                    "description": "User groups in the course.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "Submission information.",
+            "required": "VALUE_OPTIONAL",
+            "default": ""
+        },
+        "feedback": {
+            "external_single_structure": [
+                {
+                    "name": "gradefordisplay",
+                    "type": "PARAM_RAW",
+                    "description": "The student grade rendered into a format suitable for display.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "gradeddate",
+                    "type": "PARAM_INT",
+                    "description": "The date the user was graded.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "graderid",
+                    "type": "PARAM_INT",
+                    "description": "The grader user id.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "feedbackdata",
+                    "type": "PARAM_INT",
+                    "description": "Feedback plugins data.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "Feedback for the submission.",
+            "required": "VALUE_OPTIONAL",
+            "default": ""
+        },
+        "previousattempts": {
+            "external_single_structure": [
+                 {
+                    "name": "attemptnumber",
+                    "type": "PARAM_INT",
+                    "description": "Attempt number.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "from": "xmldb",
+                    "file": "mod/assign/db/install.xml",
+                    "table": "assign_submission"
+                },
+                {
+                    "from": "xmldb",
+                    "file": "mod/assign/db/install.xml",
+                    "table": "assign_grades"
+                },
+                {
+                    "name": "gradefordisplay",
+                    "type": "PARAM_RAW",
+                    "description": "Attempt number.",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "List all the previous attempts did by the user.",
+            "required": "VALUE_OPTIONAL",
+            "default": ""
+        }
+    }
+}

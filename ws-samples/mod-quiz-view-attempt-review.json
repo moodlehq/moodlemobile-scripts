@@ -1,0 +1,38 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_quiz_view_attempt_review",
+    "description": "Trigger the attempt reviewed event.",
+    "type": "write",
+    "capabilities": "mod/quiz:reviewmyattempts",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": false,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_quiz_view_attempt_summary",
+    "basictest": false,
+    "testtemplate": "",
+    "parameters": {
+        "attemptid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "attempt id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and status result",
+    "returns": {
+        "status": {
+            "external_value": {
+                "type": "PARAM_BOOL",
+                "description": "status: true if success",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        }
+    }
+}

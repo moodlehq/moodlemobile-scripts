@@ -1,0 +1,107 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_quiz_get_attempt_review",
+    "description": "Returns review information for the given finished attempt, can be used by users or teachers.",
+    "type": "read",
+    "capabilities": "mod/quiz:reviewmyattempts",
+    "copyright": "2016 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.1",
+    "bumpversion": false,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "mod_quiz_get_quizzes_by_courses",
+    "basictest": true,
+    "testtemplate": "",
+    "parameters": {
+        "attemptid": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "attempt id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            }
+        },
+        "page": {
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "page number, empty for all the questions in all the pages",
+                "required": "VALUE_OPTIONAL",
+                "default": "-1",
+                "allownull": ""
+            }
+        }
+    },
+    "returndescription": "array of warnings and the attempt data, feedback and questions",
+    "returns": {
+        "attempt": {
+            "type": "external_multiple_structure",
+            "external_value": {
+                "type": "PARAM_TEXT",
+                "description": "access message",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            },
+            "description": "attempt basic data",
+            "required": "",
+            "default": ""
+        },
+        "additionaldata": {
+            "type": "external_multiple_structure",
+            "external_single_structure": [
+                {
+                    "name": "id",
+                    "type": "PARAM_ALPHANUMEXT",
+                    "description": "id of the data",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "title",
+                    "type": "PARAM_HTML",
+                    "description": "data title",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "content",
+                    "type": "PARAM_RAW",
+                    "description": "data content",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "additional summary data and feedback",
+            "required": "",
+            "default": ""
+        },
+        "questions": {
+            "type": "external_multiple_structure",
+            "external_single_structure": [
+                {
+                    "name": "slot",
+                    "type": "PARAM_INT",
+                    "description": "slot number",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "html",
+                    "type": "PARAM_RAW",
+                    "description": "the question rendered",
+                    "required": "",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "questions",
+            "required": "",
+            "default": ""
+        }
+    }
+}
