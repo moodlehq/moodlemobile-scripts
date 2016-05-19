@@ -73,6 +73,10 @@ if (!empty($string)) {
     foreach ($componenttranslations as $key => $strings) {
         list($type, $component) = explode('.', $key);
         if ($type == 'mma') {
+            if (strpos($component, '_') !== false ) {
+                list($dir, $subdir) = explode('_', $component);
+                $component = $dir."/".$subdir;
+            }
             $path = CORE_FILES_PATH . "addons/$component/lang/$lang.json";
         } else {
             switch ($component) {

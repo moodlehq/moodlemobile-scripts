@@ -28,7 +28,7 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("MOODLE_INTERNAL", 1);
 
 define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle-langpacks/");
-define("BRANCH", "MOODLE_30_STABLE");
+define("BRANCH", "MOODLE_31_STABLE");
 define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/");
 define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/");
 
@@ -36,7 +36,7 @@ exec("cd ".STRING_FILES_PATH."; git checkout ".BRANCH."; git pull");
 
 $moodlestringfiles = array('my.php', 'moodle.php', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
                             'feedback.php', 'repository_coursefiles.php', 'forum.php', 'survey.php', 'lti.php', 'enrol_self.php',
-                            'search.php', 'scorm.php', 'message.php', 'wiki.php');
+                            'search.php', 'scorm.php', 'message.php', 'wiki.php', 'quiz.php');
 $numfound = 0;
 $numnotfound = 0;
 $notfound = array();
@@ -96,9 +96,11 @@ foreach ($moodlestringfiles as $stringfilename) {
 
             if (!empty($string[$plainid]) and (empty($jsonstrings[$id]) or $ismoodleplugin)) {
                 print("$id found -> " . $string[$plainid] . " \n");
+                $jsonstrings[$id] = str_replace('{$a->', '{$a.', $string[$plainid]);
                 $jsonstrings[$id] = str_replace('{$a}', '{{$a}}', $string[$plainid]);
                 // Prevent double.
                 $jsonstrings[$id] = str_replace('{{{$a}}}', '{{$a}}', $jsonstrings[$id]);
+                // Missing application of {\$a\.([^}]*)}.
                 $found = true;
                 $numfound++;
             } else if (empty($jsonstrings[$id])) {
@@ -123,6 +125,10 @@ foreach ($moodlestringfiles as $stringfilename) {
         foreach ($componenttranslations as $key => $strings) {
             list($type, $component) = explode('.', $key);
             if ($type == 'mma') {
+                if (strpos($component, '_') !== false ) {
+                    list($dir, $subdir) = explode('_', $component);
+                    $component = $dir."/".$subdir;
+                }
                 $path = CORE_FILES_PATH . "addons/$component/lang/$lang.json";
             } else {
                 switch ($component) {
