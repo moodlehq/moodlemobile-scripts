@@ -34,9 +34,15 @@ define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/mood
 
 exec("cd ".STRING_FILES_PATH."; git checkout ".BRANCH."; git pull");
 
-$moodlestringfiles = array('my.php', 'moodle.php', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
+$moodlestringfiles = array('my.php', 'moodle.php', 'error.php', 'repository', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
                             'feedback.php', 'repository_coursefiles.php', 'forum.php', 'survey.php', 'lti.php', 'enrol_self.php',
-                            'search.php', 'scorm.php', 'message.php', 'wiki.php', 'quiz.php');
+                            'search.php', 'scorm.php', 'message.php', 'wiki.php', 'quiz.php',
+                            'assignsubmission_onlinetext', 'assignsubmission_file.php', 'assignsubmission_comments.php',
+                            'assignfeedback_comments.php', 'assignfeedback_editpdf.php', 'assignfeedback_file.php', 'assignfeedback_offline.php',
+                            'quizaccess_delaybetweenattempts.php', 'quizaccess_ipaddress.php', 'quizaccess_numattempts.php',
+                            'quizaccess_openclosedate.php', 'quizaccess_password.php', 'quizaccess_safebrowser.php',
+                            'quizaccess_securewindow.php', 'quizaccess_timelimit.php',
+                            );
 $numfound = 0;
 $numnotfound = 0;
 $notfound = array();
@@ -96,11 +102,12 @@ foreach ($moodlestringfiles as $stringfilename) {
 
             if (!empty($string[$plainid]) and (empty($jsonstrings[$id]) or $ismoodleplugin)) {
                 print("$id found -> " . $string[$plainid] . " \n");
-                $jsonstrings[$id] = str_replace('{$a->', '{$a.', $string[$plainid]);
-                $jsonstrings[$id] = str_replace('{$a}', '{{$a}}', $string[$plainid]);
+                $jsonstrings[$id] = str_replace('$a->', '$a.', $string[$plainid]);
+                $jsonstrings[$id] = str_replace('{$a', '{{$a', $jsonstrings[$id]);
+                $jsonstrings[$id] = str_replace('}', '}}', $jsonstrings[$id]);
                 // Prevent double.
-                $jsonstrings[$id] = str_replace('{{{$a}}}', '{{$a}}', $jsonstrings[$id]);
-                // Missing application of {\$a\.([^}]*)}.
+                $jsonstrings[$id] = str_replace(array('{{{', '}}}'), array('{{', '}}'), $jsonstrings[$id]);
+                // Missing application of [^{]{\$a\.([^}]*)}[^}]
                 $found = true;
                 $numfound++;
             } else if (empty($jsonstrings[$id])) {

@@ -119,6 +119,27 @@ foreach ($finalstrings as $key => $value) {
                 continue 2;
             }
         }
+    } else if (strpos($key, 'mma.mod_assign') !== false) {
+        list($comp, $mod, $id) = explode(".", $key);
+        list($t, $modname) = explode("_", $mod);
+        $checkin = array(   "/mod/assign/lang/en/assign.php",
+                            "/mod/assign/submission/onlinetext/lang/en/assignsubmission_onlinetext.php",
+                            "/mod/assign/submission/file/lang/en/assignsubmission_file.php",
+                            "/mod/assign/submission/comments/lang/en/assignsubmission_comments.php",
+                            "/mod/assign/feedback/comments/lang/en/assignfeedback_comments.php",
+                            "/mod/assign/feedback/editpdf/lang/en/assignfeedback_editpdf.php",
+                            "/mod/assign/feedback/file/lang/en/assignfeedback_file.php",
+                            "/mod/assign/feedback/offline/lang/en/assignfeedback_offline.php",
+                            );
+
+        foreach ($checkin as $langfile) {
+            $string = array();
+            include(MOODLE_STRING_FILES_PATH . $langfile);
+            if (compare_strings($string, $id, $value)) {
+                echo "$modname string with id $key exists \n";
+                continue 2;
+            }
+        }
     } else if (strpos($key, 'mma.mod_') !== false) {
         list($comp, $mod, $id) = explode(".", $key);
         list($t, $modname) = explode("_", $mod);
@@ -132,11 +153,19 @@ foreach ($finalstrings as $key => $value) {
 
     if (strpos($key, 'mm.core.') !== false) {
         list($comp, $mod, $id) = explode(".", $key);
-        $string = array();
-        include(MOODLE_STRING_FILES_PATH . "/lang/en/moodle.php");
-        if (compare_strings($string, $id, $value)) {
-            echo "string with id $key exists \n";
-            continue;
+        $checkin = array(
+            "/lang/en/moodle.php",
+            "/lang/en/error.php",
+            "/lang/en/repository.php",
+        );
+
+        foreach ($checkin as $langfile) {
+            $string = array();
+            include(MOODLE_STRING_FILES_PATH . $langfile);
+            if (compare_strings($string, $id, $value)) {
+                echo "string with id $key exists \n";
+                continue 2;
+            }
         }
     }
 
