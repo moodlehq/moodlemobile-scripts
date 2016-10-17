@@ -10,6 +10,7 @@ cd $MASTER_PATH
 git checkout master
 git fetch moodlehq
 git merge moodlehq/master master
+bower install
 gulp
 cd $PB_PATH
 git checkout master
@@ -17,7 +18,7 @@ cp -pr $MASTER_PATH/www/* $PB_PATH/
 # Commit and push.
 if [ $# -eq 1 ]
   then
-    git commit -ma "Sync with master"
+    git commit -am "Sync with master"
     git rebase master android
     git rebase master ios
     git push --force

@@ -49,6 +49,9 @@ if (!empty($string)) {
 
     // We overwrite existing translations that maybe were automatically created by auto-translate.php.
     foreach ($string as $id => $content) {
+        if (empty($content)) {
+            continue;
+        }
         // Omit old strings.
         if (strpos($id, ".") === false) {
             echo "lang $lang: omitting $id \n";

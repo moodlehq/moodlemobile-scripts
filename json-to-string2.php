@@ -35,6 +35,11 @@ $jsonstrings = (array) json_decode(file_get_contents(JSON_FILE_PATH), true);
 include(STRING_FILES_PATH);
 
 $finalstrings = array_replace($string, $jsonstrings);
+// Keep this two.
+$jsonstrings['appstoredescription'] = $string['appstoredescription'];
+$jsonstrings['pluginname'] = $string['pluginname'];
+
+//$finalstrings = array_intersect_assoc($finalstrings, $jsonstrings);
 // Order the array.
 ksort($finalstrings);
 
