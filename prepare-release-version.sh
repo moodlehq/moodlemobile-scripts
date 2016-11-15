@@ -15,6 +15,31 @@ gulp
 cd $PB_PATH
 git checkout master
 cp -pr $MASTER_PATH/www/* $PB_PATH/
+# Delete not-required files.
+find addons -name "*.js" -type f -delete
+find core -name "*.js" -type f -delete
+find addons -name "*.json" -type f -delete
+find core -name "*.json" -type f -delete
+find addons -name "*.scss" -type f -delete
+find core -name "*.scss" -type f -delete
+find . -name "*bower.json" -type f -delete
+find . -name "*.md" -type f -delete
+find . -name "*README*" -type f -delete
+find . -name "*LICENSE*" -type f -delete
+find . -name "*.gzip" -type f -delete
+find lib -name "package.json" -type f -delete
+rm -rf lib/ionic/demos
+rm -rf lib/angular-md5/example
+rm -rf lib/angular-ui-router/src
+rm -rf lib/moment/src
+rm -rf lib/ionic/scss
+rm -rf lib/ckeditor/samples
+rm -rf lib/jszip/docs
+rm -rf lib/jszip/documentation
+rm -rf lib/ydn.db/test
+rm -rf lib/ydn.db/example
+rm -rf lib/ydn.db/src
+cp -pr $MASTER_PATH/www/core/assets/countries/* $PB_PATH/core/assets/countries/
 # Commit and push.
 if [ $# -eq 1 ]
   then
