@@ -42,6 +42,7 @@ $moodlestringfiles = array('my.php', 'moodle.php', 'error.php', 'repository', 'c
                             'quizaccess_delaybetweenattempts.php', 'quizaccess_ipaddress.php', 'quizaccess_numattempts.php',
                             'quizaccess_openclosedate.php', 'quizaccess_password.php', 'quizaccess_safebrowser.php',
                             'quizaccess_securewindow.php', 'quizaccess_timelimit.php',
+                            'compentency.php', 'tool_lp.php'
                             );
 $numfound = 0;
 $numnotfound = 0;
@@ -82,6 +83,13 @@ foreach ($moodlestringfiles as $stringfilename) {
         $jsonfile = JSON_FILES_PATH . "$lang.json";
         $jsonstrings = file_get_contents($jsonfile);
         $jsonstrings = (array) json_decode($jsonstrings);
+
+        // Remove strings that are not in master english.
+        foreach ($jsonstrings as $stringid => $stringcontent) {
+            if (!in_array($stringid, $englishids)) {
+                unset($jsonstrings[$stringid]);
+            }
+        }
 
         // Missing strings.
         $found = false;
