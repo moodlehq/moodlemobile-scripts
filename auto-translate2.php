@@ -28,21 +28,21 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("MOODLE_INTERNAL", 1);
 
 define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle-langpacks/");
-define("BRANCH", "MOODLE_31_STABLE");
+define("BRANCH", "MOODLE_32_STABLE");
 define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/");
 define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/");
 
 exec("cd ".STRING_FILES_PATH."; git checkout ".BRANCH."; git pull");
 
-$moodlestringfiles = array('my.php', 'moodle.php', 'error.php', 'repository', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
+$moodlestringfiles = array('my.php', 'moodle.php', 'error.php', 'repository.php', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
                             'feedback.php', 'repository_coursefiles.php', 'forum.php', 'survey.php', 'lti.php', 'enrol_self.php',
-                            'search.php', 'scorm.php', 'message.php', 'wiki.php', 'quiz.php',
+                            'search.php', 'scorm.php', 'message.php', 'wiki.php', 'quiz.php', 'grades.php', 'grading.php',
                             'assignsubmission_onlinetext', 'assignsubmission_file.php', 'assignsubmission_comments.php',
                             'assignfeedback_comments.php', 'assignfeedback_editpdf.php', 'assignfeedback_file.php', 'assignfeedback_offline.php',
                             'quizaccess_delaybetweenattempts.php', 'quizaccess_ipaddress.php', 'quizaccess_numattempts.php',
                             'quizaccess_openclosedate.php', 'quizaccess_password.php', 'quizaccess_safebrowser.php',
                             'quizaccess_securewindow.php', 'quizaccess_timelimit.php',
-                            'compentency.php', 'tool_lp.php'
+                            'compentency.php', 'tool_lp.php', 'auth.php', 'langconfig.php'
                             );
 $numfound = 0;
 $numnotfound = 0;
@@ -83,13 +83,6 @@ foreach ($moodlestringfiles as $stringfilename) {
         $jsonfile = JSON_FILES_PATH . "$lang.json";
         $jsonstrings = file_get_contents($jsonfile);
         $jsonstrings = (array) json_decode($jsonstrings);
-
-        // Remove strings that are not in master english.
-        foreach ($jsonstrings as $stringid => $stringcontent) {
-            if (!in_array($stringid, $englishids)) {
-                unset($jsonstrings[$stringid]);
-            }
-        }
 
         // Missing strings.
         $found = false;
@@ -161,6 +154,15 @@ foreach ($moodlestringfiles as $stringfilename) {
                 $finalstrings = array_replace($jsonstrings, $strings);
             } else {
                 $finalstrings = $strings;
+            }
+
+            $englishstrings = file_get_contents(str_replace("$lang.json", "en.json", $path));
+            $englishstrings = (array) json_decode($englishstrings);
+            // Remove strings that are not in master english.
+            foreach ($finalstrings as $stringid => $stringcontent) {
+                if (empty($englishstrings[$stringid])) {
+                    unset($finalstrings[$stringid]);
+                }
             }
 
             ksort($finalstrings);

@@ -88,7 +88,11 @@ $specialstrings = array(
     'mm.core.seemoredetail',
     'mm.core.timesup',
     'mm.course.overriddennotice',
-    'mm.core.send'
+    'mm.core.send',
+    'mma.messages.deletemessage',
+    'mma.messages.deletemessageconfirmation',
+    'mma.mod_chat.sessionstart',
+    'mm.core.done',
 );
 
 foreach ($finalstrings as $key => $value) {
@@ -127,7 +131,9 @@ foreach ($finalstrings as $key => $value) {
     } else if (strpos($key, 'mma.mod_assign') !== false) {
         list($comp, $mod, $id) = explode(".", $key);
         list($t, $modname) = explode("_", $mod);
-        $checkin = array(   "/mod/assign/lang/en/assign.php",
+        $checkin = array(
+                            "/lang/en/grades.php",
+                            "/mod/assign/lang/en/assign.php",
                             "/mod/assign/submission/onlinetext/lang/en/assignsubmission_onlinetext.php",
                             "/mod/assign/submission/file/lang/en/assignsubmission_file.php",
                             "/mod/assign/submission/comments/lang/en/assignsubmission_comments.php",
@@ -156,10 +162,12 @@ foreach ($finalstrings as $key => $value) {
         }
     }
 
-    if (strpos($key, 'mm.core.') !== false) {
+    if (strpos($key, 'mm.core.') !== false || strpos($key, 'mm.login.') !== false || strpos($key, 'mm.user.') !== false) {
         list($comp, $mod, $id) = explode(".", $key);
         $checkin = array(
             "/lang/en/moodle.php",
+            "/lang/en/auth.php",
+            "/lang/en/langconfig.php",
             "/lang/en/error.php",
             "/lang/en/repository.php",
         );
@@ -190,6 +198,38 @@ foreach ($finalstrings as $key => $value) {
         }
     }
 
+    if (strpos($key, 'mma.badges') !== false) {
+        list($comp, $mod, $id) = explode(".", $key);
+        $checkin = array(   "/lang/en/badges.php",
+                            );
+
+        foreach ($checkin as $langfile) {
+            $string = array();
+            include(MOODLE_STRING_FILES_PATH . $langfile);
+            if (compare_strings($string, $id, $value)) {
+                echo "string with id $key exists \n";
+                continue 2;
+            }
+        }
+    }
+
+    if (strpos($key, 'mma.grades') !== false) {
+        list($comp, $mod, $id) = explode(".", $key);
+        $checkin = array(
+            "/lang/en/grades.php",
+            "/lang/en/grading.php",
+                            );
+
+        foreach ($checkin as $langfile) {
+            $string = array();
+            include(MOODLE_STRING_FILES_PATH . $langfile);
+            if (compare_strings($string, $id, $value)) {
+                echo "string with id $key exists \n";
+                continue 2;
+            }
+        }
+    }
+
     if (strpos($key, 'mma.messages.') !== false) {
         list($comp, $mod, $id) = explode(".", $key);
         $string = array();
@@ -197,6 +237,24 @@ foreach ($finalstrings as $key => $value) {
         if (compare_strings($string, $id, $value)) {
             echo "string with id $key exists \n";
             continue;
+        }
+    }
+
+    if (strpos($key, 'mm.settings.') !== false) {
+        list($comp, $mod, $id) = explode(".", $key);
+        $checkin = array(
+            "/lang/en/moodle.php",
+            "/lang/en/message.php",
+            "/lang/en/repository.php",
+        );
+
+        foreach ($checkin as $langfile) {
+            $string = array();
+            include(MOODLE_STRING_FILES_PATH . $langfile);
+            if (compare_strings($string, $id, $value)) {
+                echo "string with id $key exists \n";
+                continue 2;
+            }
         }
     }
 

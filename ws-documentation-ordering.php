@@ -64,6 +64,12 @@ foreach ($lines as $line) {
 $orderedfunctions = array_keys($functions);
 sort($orderedfunctions);
 
+$latestfunctions = get_external_functions(MOODLE_LATEST_VERSION);
+
+echo '
+{| class="wikitable sortable"
+!Area!! Name !! Introduced in !! class="unsortable" |Description !!  Available AJAX !! Login required !! Services ';
+
 foreach ($orderedfunctions as $fname) {
 
     $oldfname = $functions[$fname]['oldfname'];
@@ -71,13 +77,20 @@ foreach ($orderedfunctions as $fname) {
     $description = $functions[$fname]['description'];
     $issue = $functions[$fname]['issue'];
     $component = $functions[$fname]['component'];
+    $ajax = (!empty($latestfunctions[$fname]['ajax'])) ? 'Yes' : 'No';
+    $loginrequired = (!isset($latestfunctions[$fname]['loginrequired']) || $latestfunctions[$fname]['loginrequired']) ? 'Yes' : 'No';
+    $services = (!empty($latestfunctions[$fname]['services'])) ? implode(',', $latestfunctions[$fname]['services']) : '';
 
     echo '
 |-
-| ' . $component . '
-| style="background:#D4FFDF;" | ' . $fname . ' || style="background:#D4FFDF;" | ' . $oldfname . ' || style="background:#D4FFDF;" | ' . $version . ' || style="background:#D4FFDF;" | ' . $description . ' || ' . $issue;
+| ' . $component . ' || ' . $fname . ' || ' . $version . ' || ' . $description . ' || ' . $ajax . ' || ' . $loginrequired. ' || ' . $services;
 
 }
+echo '
+|-
+|}
+';
+
 
 echo "\n\n\n MISSING DETECTED FUNCTIONS HERE \n\n\n";
 
@@ -113,8 +126,6 @@ function get_external_functions($path) {
     }
     return $externalfunctions;
 }
-
-$latestfunctions = get_external_functions(MOODLE_LATEST_VERSION);
 
 $newfunctions = array_diff(array_keys($latestfunctions), $orderedfunctions);
 sort($newfunctions);

@@ -63,6 +63,12 @@ if (!empty($string)) {
         $jsonstrings[$id] = $content;
     }
 
+    foreach ($jsonstrings as $id => $content) {
+        if (strpos($id, 'country-') !== false) {
+            unset($jsonstrings[$id]);
+        }
+    }
+
     ksort($jsonstrings);
     file_put_contents($jsonfile, json_encode($jsonstrings, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 

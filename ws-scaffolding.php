@@ -161,18 +161,6 @@ if (!empty($data->bumpmodversion)) {
     file_replace_contents($data->moodlebasepath . "/mod/$pluginname/version.php", "$plugin->version", "$newversion");
 }
 
-// Include new function into the mobile service.
-if (!empty($data->addtothemobileservice)) {
-    $serviceslib = $data->moodlebasepath . "/lib/db/services.php";
-
-    if (empty($data->addafter)) {
-        $data->addafter = "core_message_send_instant_messages";
-    }
-
-    file_replace_contents($serviceslib, "$data->addafter',", "$data->addafter',\n            '$data->name',");
-
-    output("Function added to the mobile service");
-}
 
 // Service definition.
 $template = "    'mod_${pluginname}_${function}' => array(
@@ -180,8 +168,16 @@ $template = "    'mod_${pluginname}_${function}' => array(
         'methodname'    => '$function',
         'description'   => '$data->description',
         'type'          => '$data->type',
-        'capabilities'  => '$data->capabilities'
-    ),";
+        'capabilities'  => '$data->capabilities',
+";
+
+// Include new function into the mobile service.
+if (!empty($data->addtothemobileservice)) {
+    $template .= "        'services'  => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+";
+}
+
+$template .= "    ),";
 
 file_replace_contents($servicesfile, ");", "\n" . $template . "\n);");
 

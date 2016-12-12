@@ -26,9 +26,9 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("CLI_SCRIPT", 1);
 define("MOODLE_INTERNAL", 1);
 
-define("MOODLE_PREVIOUS_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_30/moodle");
+define("MOODLE_PREVIOUS_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_31/moodle");
 define("MOODLE_LATEST_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_master/moodle");
-define("MOODLE_LATEST_VERSION_NUMBER", "3.1");
+define("MOODLE_LATEST_VERSION_NUMBER", "3.2");
 
 if (!file_exists(MOODLE_LATEST_VERSION)) {
     exit("Invalid path" . MOODLE_LATEST_VERSION);

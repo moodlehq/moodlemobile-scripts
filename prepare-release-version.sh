@@ -39,7 +39,7 @@ rm -rf lib/jszip/documentation
 rm -rf lib/ydn.db/test
 rm -rf lib/ydn.db/example
 rm -rf lib/ydn.db/src
-cp -pr $MASTER_PATH/www/core/assets/countries/* $PB_PATH/core/assets/countries/
+cp -pr $MASTER_PATH/www/core/assets/* $PB_PATH/core/assets/
 # Commit and push.
 if [ $# -eq 1 ]
   then
