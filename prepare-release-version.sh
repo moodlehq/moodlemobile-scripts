@@ -27,6 +27,7 @@ find . -name "*.md" -type f -delete
 find . -name "*README*" -type f -delete
 find . -name "*LICENSE*" -type f -delete
 find . -name "*.gzip" -type f -delete
+find . -name ".gitignore" -type f -delete
 find lib -name "package.json" -type f -delete
 rm -rf lib/ionic/demos
 rm -rf lib/angular-md5/example
@@ -39,6 +40,11 @@ rm -rf lib/jszip/documentation
 rm -rf lib/ydn.db/test
 rm -rf lib/ydn.db/example
 rm -rf lib/ydn.db/src
+rm -rf  lib/chart.js/docs
+rm -rf  lib/chart.js/test
+rm -rf  lib/chart.js/src
+rm -rf  lib/chart.js/samples
+rm -rf  lib/chart.js/scripts
 cp -pr $MASTER_PATH/www/core/assets/* $PB_PATH/core/assets/
 # Commit and push.
 if [ $# -eq 1 ]

@@ -1,0 +1,70 @@
+{
+    "moodlebasepath": "/Users/juanleyvadelgado/www/m/stable_master",
+    "name": "mod_lesson_get_lessons_by_courses",
+    "description": "Returns a list of lessons in a provided list of courses, if no list is provided all lessons that the user can view will be returned.",
+    "type": "read",
+    "capabilities": "mod/lesson:view",
+    "copyright": "2017 Juan Leyva <juan@moodle.com>",
+    "since": "Moodle 3.3",
+    "bumpversion": false,
+    "bumpmodversion": true,
+    "addtothemobileservice": true,
+    "addafter": "",
+    "basictest": false,
+    "testtemplate": "mod/survey/tests/externallib_test.php:test_mod_survey_get_surveys_by_courses",
+    "parameters": {
+        "courseids": {
+            "type": "external_multiple_structure",
+            "external_value": {
+                "type": "PARAM_INT",
+                "description": "course id",
+                "required": "",
+                "default": "",
+                "allownull": ""
+            },
+            "description": "Array of course ids",
+            "required": "VALUE_DEFAULT",
+            "default": "array()"
+        }
+    },
+    "returndescription": "array of warnings and lessons",
+    "returns": {
+        "lessons": {
+            "type": "external_multiple_structure",
+            "external_single_structure": [
+                {
+                    "from": "xmldb",
+                    "file": "mod/lesson/db/install.xml",
+                    "table": "lesson"
+                },
+                {
+                    "name": "visible",
+                    "type": "PARAM_INT",
+                    "description": "visible",
+                    "required": "VALUE_OPTIONAL",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "groupmode",
+                    "type": "PARAM_INT",
+                    "description": "group mode",
+                    "required": "VALUE_OPTIONAL",
+                    "default": "",
+                    "allownull": ""
+                },
+                {
+                    "name": "groupingid",
+                    "type": "PARAM_INT",
+                    "description": "grouping id",
+                    "required": "VALUE_OPTIONAL",
+                    "default": "",
+                    "allownull": ""
+                }
+            ],
+            "description": "lessons",
+            "required": "",
+            "default": ""
+        }
+    }
+}

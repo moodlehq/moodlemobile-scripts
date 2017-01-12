@@ -173,7 +173,7 @@ $template = "    'mod_${pluginname}_${function}' => array(
 
 // Include new function into the mobile service.
 if (!empty($data->addtothemobileservice)) {
-    $template .= "        'services'  => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
+    $template .= "        'services'    => array(MOODLE_OFFICIAL_MOBILE_SERVICE),
 ";
 }
 
@@ -267,7 +267,7 @@ $parameterstpl = "
     /**
      * Describes the parameters for $function.
      *
-     * @return external_external_function_parameters
+     * @return external_function_parameters
      * @since $data->since
      */
     public static function {$function}_parameters() {
