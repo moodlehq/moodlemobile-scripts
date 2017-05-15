@@ -39,10 +39,11 @@ $moodlestringfiles = array('my.php', 'moodle.php', 'error.php', 'repository.php'
                             'search.php', 'scorm.php', 'message.php', 'wiki.php', 'quiz.php', 'grades.php', 'grading.php',
                             'assignsubmission_onlinetext', 'assignsubmission_file.php', 'assignsubmission_comments.php',
                             'assignfeedback_comments.php', 'assignfeedback_editpdf.php', 'assignfeedback_file.php', 'assignfeedback_offline.php',
+                            'question.php',
                             'quizaccess_delaybetweenattempts.php', 'quizaccess_ipaddress.php', 'quizaccess_numattempts.php',
                             'quizaccess_openclosedate.php', 'quizaccess_password.php', 'quizaccess_safebrowser.php',
                             'quizaccess_securewindow.php', 'quizaccess_timelimit.php',
-                            'compentency.php', 'tool_lp.php', 'auth.php', 'langconfig.php'
+                            'compentency.php', 'tool_lp.php', 'auth.php', 'langconfig.php', 'enrol_guest.php'
                             );
 $numfound = 0;
 $numnotfound = 0;
@@ -71,7 +72,7 @@ foreach ($moodlestringfiles as $stringfilename) {
         $_lang = str_replace('-', '_', $lang);
         $stringfile = STRING_FILES_PATH . "$_lang/$stringfilename";
         if (!file_exists($stringfile)) {
-            print("String file $stringfilename doesn't exists for language $lang (Path: $stringfile)\n");
+            // print("String file $stringfilename doesn't exists for language $lang (Path: $stringfile)\n");
             continue;
         }
 
@@ -102,7 +103,7 @@ foreach ($moodlestringfiles as $stringfilename) {
             }
 
             if (!empty($string[$plainid]) and (empty($jsonstrings[$id]) or $ismoodleplugin)) {
-                print("$id found -> " . $string[$plainid] . " \n");
+                // print("$id found -> " . $string[$plainid] . " \n");
                 $jsonstrings[$id] = str_replace('$a->', '$a.', $string[$plainid]);
                 $jsonstrings[$id] = str_replace('{$a', '{{$a', $jsonstrings[$id]);
                 $jsonstrings[$id] = str_replace('}', '}}', $jsonstrings[$id]);
@@ -162,6 +163,7 @@ foreach ($moodlestringfiles as $stringfilename) {
             foreach ($finalstrings as $stringid => $stringcontent) {
                 if (empty($englishstrings[$stringid])) {
                     unset($finalstrings[$stringid]);
+                    //print("Removing string $stringid in language $lang\n\n");
                 }
             }
 
@@ -173,9 +175,9 @@ foreach ($moodlestringfiles as $stringfilename) {
 
 ksort($notfound);
 foreach ($notfound as $key => $nf) {
-    print("$key: ");
-    print(implode(' ', array_keys($nf)));
-    print("\n\n");
+    // print("$key: ");
+    // print(implode(' ', array_keys($nf)));
+    // print("\n\n");
 }
 print("\n\nFound $numfound\n");
 print("Not found $numnotfound\n\n");

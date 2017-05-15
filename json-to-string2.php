@@ -92,7 +92,8 @@ $specialstrings = array(
     'mma.messages.deletemessage',
     'mma.messages.deletemessageconfirmation',
     'mma.mod_chat.sessionstart',
-    'mm.core.done',
+    'mma.files.files',
+    'mma.files.privatefiles',
 );
 
 foreach ($finalstrings as $key => $value) {
@@ -162,7 +163,10 @@ foreach ($finalstrings as $key => $value) {
         }
     }
 
-    if (strpos($key, 'mm.core.') !== false || strpos($key, 'mm.login.') !== false || strpos($key, 'mm.user.') !== false) {
+    if (strpos($key, 'mm.core.') !== false || strpos($key, 'mm.login.') !== false ||
+            strpos($key, 'mm.user.') !== false || strpos($key, 'mm.course.') !== false ||
+            strpos($key, 'mm.courses.') !== false || strpos($key, 'mma.files.') !== false ||
+            strpos($key, 'mma.frontpage.') !== false) {
         list($comp, $mod, $id) = explode(".", $key);
         $checkin = array(
             "/lang/en/moodle.php",
@@ -170,6 +174,8 @@ foreach ($finalstrings as $key => $value) {
             "/lang/en/langconfig.php",
             "/lang/en/error.php",
             "/lang/en/repository.php",
+            '/enrol/guest/lang/en/enrol_guest.php',
+            "/admin/tool/usertours/lang/en/tool_usertours.php",
         );
 
         foreach ($checkin as $langfile) {
@@ -213,7 +219,7 @@ foreach ($finalstrings as $key => $value) {
         }
     }
 
-    if (strpos($key, 'mma.grades') !== false) {
+    if (strpos($key, 'mma.grades') !== false || strpos($key, 'mm.grades') !== false) {
         list($comp, $mod, $id) = explode(".", $key);
         $checkin = array(
             "/lang/en/grades.php",

@@ -15,7 +15,7 @@ LANG_DIR="/Users/juanleyvadelgado/Documents/MoodleMobile/GIT/lang"
 # Conversion script
 CONV_SCRIPT="/Users/juanleyvadelgado/Documents/MoodleMobile/scripts/stringtojson2.php"
 # Minimun number of strings translated the language pack should have
-LINES_MIN=150
+LINES_MIN=50
 
 if [ $# -eq 0 ]
   then
