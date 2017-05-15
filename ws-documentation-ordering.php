@@ -38,25 +38,24 @@ $lines = explode("|-", $doc);
 
 $functions = array();
 foreach ($lines as $line) {
-    $els = explode("|", $line);
+    if (empty(trim($line))) {
+        continue;
+    }
 
-    $fname = trim($els[3]);
+    $els = explode("||", $line);
+
+    $fname = trim($els[1]);
     $fname = str_replace('()', '', $fname);
-    $oldfname = $els[6];
-    $version = $els[9];
-    $description = $els[12];
-    $issue = $els[14];
+    $version = $els[2];
+    $description = $els[3];
 
     $fnameels = explode('_', $fname);
     $component = $fnameels[0] . '_' . $fnameels[1];
 
     $functions[$fname] = array(
         'fname' => $fname,
-        'oldfname' => $oldfname,
         'version' => $version,
         'description' => $description,
-        'issue' => $issue,
-        'issue' => $issue,
         'component' => $component,
     );
 }
@@ -72,10 +71,8 @@ echo '
 
 foreach ($orderedfunctions as $fname) {
 
-    $oldfname = $functions[$fname]['oldfname'];
     $version = $functions[$fname]['version'];
     $description = $functions[$fname]['description'];
-    $issue = $functions[$fname]['issue'];
     $component = $functions[$fname]['component'];
     $ajax = (!empty($latestfunctions[$fname]['ajax'])) ? 'Yes' : 'No';
     $loginrequired = (!isset($latestfunctions[$fname]['loginrequired']) || $latestfunctions[$fname]['loginrequired']) ? 'Yes' : 'No';

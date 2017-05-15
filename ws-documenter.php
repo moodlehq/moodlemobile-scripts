@@ -26,9 +26,9 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("CLI_SCRIPT", 1);
 define("MOODLE_INTERNAL", 1);
 
-define("MOODLE_PREVIOUS_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_31/moodle");
+define("MOODLE_PREVIOUS_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_32/moodle");
 define("MOODLE_LATEST_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_master/moodle");
-define("MOODLE_LATEST_VERSION_NUMBER", "3.2");
+define("MOODLE_LATEST_VERSION_NUMBER", "3.3");
 
 if (!file_exists(MOODLE_LATEST_VERSION)) {
     exit("Invalid path" . MOODLE_LATEST_VERSION);
@@ -83,8 +83,7 @@ foreach ($newfunctions as $fname) {
     $description = addslashes($latestfunctions[$fname]['description']);
 echo '
 |-
-| ' . $classname . '
-| style="background:#D4FFDF;" | ' . $fname . ' || style="background:#D4FFDF;" | || style="background:#D4FFDF;" | ' . MOODLE_LATEST_VERSION_NUMBER . ' || style="background:#D4FFDF;" | ' . $description . ' ||';
+| ' . $classname . ' || ' . $fname . ' || ' . MOODLE_LATEST_VERSION_NUMBER . ' || ' . $description . ' ||';
 }
 
 // Exit 0 mean success.
