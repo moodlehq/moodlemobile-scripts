@@ -35,7 +35,7 @@ define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/mood
 exec("cd ".STRING_FILES_PATH."; git checkout ".BRANCH."; git pull");
 
 $moodlestringfiles = array('my.php', 'moodle.php', 'error.php', 'repository.php', 'chat.php', 'completion.php', 'choice.php', 'badges.php', 'assign.php',
-                            'feedback.php', 'repository_coursefiles.php', 'forum.php', 'survey.php', 'lti.php', 'enrol_self.php',
+                            'feedback.php', 'lesson.php', 'data.php', 'repository_coursefiles.php', 'forum.php', 'survey.php', 'lti.php', 'enrol_self.php',
                             'search.php', 'scorm.php', 'message.php', 'wiki.php', 'quiz.php', 'grades.php', 'grading.php',
                             'assignsubmission_onlinetext', 'assignsubmission_file.php', 'assignsubmission_comments.php',
                             'assignfeedback_comments.php', 'assignfeedback_editpdf.php', 'assignfeedback_file.php', 'assignfeedback_offline.php',
