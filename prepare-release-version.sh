@@ -11,9 +11,11 @@ git checkout master
 git fetch moodlehq
 git merge moodlehq/master master
 bower install
+bower update
 gulp
 cd $PB_PATH
 git checkout master
+git pull
 cp -pr $MASTER_PATH/www/* $PB_PATH/
 # Delete not-required files.
 find addons -name "*.js" -type f -delete
@@ -29,7 +31,13 @@ find . -name "*LICENSE*" -type f -delete
 find . -name "*.gzip" -type f -delete
 find . -name ".gitignore" -type f -delete
 find lib -name "package.json" -type f -delete
+sed -i bak -e 's/ionic.bundle.js/ionic.bundle.min.js/' index.html
+rm lib/ionic/release/js/ionic.bundle.js
+rm lib/ionic/release/js/ionic.js
+rm lib/ionic/release/js/ionic-angular.js
+rm index.htmlbak
 rm -rf lib/ionic/demos
+rm -rf lib/ionic/js
 rm -rf lib/angular-md5/example
 rm -rf lib/angular-ui-router/src
 rm -rf lib/moment/src

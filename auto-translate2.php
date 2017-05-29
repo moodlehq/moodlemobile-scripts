@@ -28,7 +28,7 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("MOODLE_INTERNAL", 1);
 
 define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle-langpacks/");
-define("BRANCH", "MOODLE_32_STABLE");
+define("BRANCH", "MOODLE_33_STABLE");
 define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/");
 define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/");
 
@@ -43,7 +43,7 @@ $moodlestringfiles = array('my.php', 'moodle.php', 'error.php', 'repository.php'
                             'quizaccess_delaybetweenattempts.php', 'quizaccess_ipaddress.php', 'quizaccess_numattempts.php',
                             'quizaccess_openclosedate.php', 'quizaccess_password.php', 'quizaccess_safebrowser.php',
                             'quizaccess_securewindow.php', 'quizaccess_timelimit.php',
-                            'compentency.php', 'tool_lp.php', 'auth.php', 'langconfig.php', 'enrol_guest.php'
+                            'compentency.php', 'tool_lp.php', 'auth.php', 'langconfig.php', 'enrol_guest.php', 'block_myoverview.php'
                             );
 $numfound = 0;
 $numnotfound = 0;
@@ -61,6 +61,8 @@ foreach ($files as $f) {
 $englishids = file_get_contents(JSON_FILES_PATH . "en.json");
 $englishids = (array) json_decode($englishids);
 $englishids = array_keys($englishids);
+
+$translated = array();
 
 foreach ($moodlestringfiles as $stringfilename) {
 
@@ -88,10 +90,32 @@ foreach ($moodlestringfiles as $stringfilename) {
         // Missing strings.
         $found = false;
         foreach ($englishids as $id) {
+            $force = false;
             if (strpos($id, ".") === false) {
                 continue;
             }
             list($type, $component, $plainid) = explode('.', $id);
+
+            if ($component == 'myoverview') {
+                if ($stringfilename != 'block_myoverview.php') {
+                    continue;
+                } else {
+                    $force = true;
+                }
+            }
+
+            if (strpos($plainid, 'mod_') !== false) {
+                $modname = str_replace('mod_', '', $plainid);
+                if ($modname == str_replace('.php', '', $stringfilename)) {
+                    $found = true;
+                    $numfound++;
+                    if (empty($string['pluginname'])) {
+                        echo "Missing pluginname in $lang / $stringfilename \n";
+                    } else if (empty($jsonstrings[$id])) {
+                        $jsonstrings[$id] = $string['pluginname'];
+                    }
+                }
+            }
 
             // We are translating and addon that is a Moodle module.
             $ismoodleplugin = false;
@@ -102,7 +126,15 @@ foreach ($moodlestringfiles as $stringfilename) {
                 }
             }
 
-            if (!empty($string[$plainid]) and (empty($jsonstrings[$id]) or $ismoodleplugin)) {
+
+
+            if (!empty($string[$plainid]) and !empty($jsonstrings[$id])) {
+                if (trim($string[$plainid]) != trim($jsonstrings[$id]) && !isset($translated[$lang][$id])) {
+                    $force = true;
+                }
+            }
+
+            if (!empty($string[$plainid]) and ((empty($jsonstrings[$id]) or $ismoodleplugin) or $force)) {
                 // print("$id found -> " . $string[$plainid] . " \n");
                 $jsonstrings[$id] = str_replace('$a->', '$a.', $string[$plainid]);
                 $jsonstrings[$id] = str_replace('{$a', '{{$a', $jsonstrings[$id]);
@@ -112,6 +144,8 @@ foreach ($moodlestringfiles as $stringfilename) {
                 // Missing application of [^{]{\$a\.([^}]*)}[^}]
                 $found = true;
                 $numfound++;
+
+                $translated[$lang][$id] = $id;
             } else if (empty($jsonstrings[$id])) {
                 $notfound[$plainid][$lang] = "$stringfilename";
                 $numnotfound++;

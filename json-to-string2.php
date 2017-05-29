@@ -73,10 +73,10 @@ $templatefile = "<?php
 function compare_strings($string, $id, $value) {
     if (isset($string[$id])) {
 
-        $cleanstring = str_replace(array('{', '}'), '', $string[$id]);
+        $cleanstring = trim(str_replace(array('{', '}', "\n", "\r\n"), '', $string[$id]));
 
         $cleanvalue  = str_replace('$a.', '$a->', $value);
-        $cleanvalue  = str_replace(array('{', '}'), '', $cleanvalue);
+        $cleanvalue  = trim(str_replace(array('{', '}', "\n", "\r\n"), '', $cleanvalue));
 
         return $cleanstring == $cleanvalue;
     }
@@ -89,11 +89,14 @@ $specialstrings = array(
     'mm.core.timesup',
     'mm.course.overriddennotice',
     'mm.core.send',
+    'mm.core.start',
     'mma.messages.deletemessage',
     'mma.messages.deletemessageconfirmation',
     'mma.mod_chat.sessionstart',
     'mma.files.files',
     'mma.files.privatefiles',
+    'mm.login.invalidurl',
+    'mm.core.search',
 );
 
 foreach ($finalstrings as $key => $value) {
@@ -173,6 +176,7 @@ foreach ($finalstrings as $key => $value) {
             "/lang/en/auth.php",
             "/lang/en/langconfig.php",
             "/lang/en/error.php",
+            "/lang/en/completion.php",
             "/lang/en/repository.php",
             '/enrol/guest/lang/en/enrol_guest.php',
             "/admin/tool/usertours/lang/en/tool_usertours.php",
@@ -186,6 +190,11 @@ foreach ($finalstrings as $key => $value) {
                 continue 2;
             }
         }
+    }
+
+    if (strpos($key, 'mm.core.mod_') !== false) {
+        echo "string with id $key exists \n";
+        continue;
     }
 
     if (strpos($key, 'mma.competency') !== false) {
@@ -240,6 +249,16 @@ foreach ($finalstrings as $key => $value) {
         list($comp, $mod, $id) = explode(".", $key);
         $string = array();
         include(MOODLE_STRING_FILES_PATH . "/lang/en/message.php");
+        if (compare_strings($string, $id, $value)) {
+            echo "string with id $key exists \n";
+            continue;
+        }
+    }
+
+    if (strpos($key, 'mma.myoverview.') !== false) {
+        list($comp, $mod, $id) = explode(".", $key);
+        $string = array();
+        include(MOODLE_STRING_FILES_PATH . "/blocks/myoverview/lang/en/block_myoverview.php");
         if (compare_strings($string, $id, $value)) {
             echo "string with id $key exists \n";
             continue;

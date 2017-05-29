@@ -27,6 +27,9 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/");
 define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/");
 
+$jsonfile = JSON_FILES_PATH . "en.json";
+$masterstrings = file_get_contents($jsonfile);
+$masterstrings = (array) json_decode($masterstrings);
 
 $lang = str_replace('_', '-', $argv[1]);
 $file = $argv[2];
@@ -57,6 +60,11 @@ if (!empty($string)) {
             echo "lang $lang: omitting $id \n";
             continue;
         }
+        // Omit strings not in master english file (to include again deprecated ones).
+        if (empty($masterstrings[$id])) {
+            continue;
+        }
+
         $content = str_replace('{$a}', '{{$a}}', $content);
         // Prevent double.
         $content = str_replace('{{{$a}}}', '{{$a}}', $content);

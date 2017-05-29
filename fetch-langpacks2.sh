@@ -23,6 +23,7 @@ if [ $# -eq 0 ]
     exit 1
 fi
 
+gulp
 cd $GIT_PATH
 git checkout $BRANCH
 git pull
