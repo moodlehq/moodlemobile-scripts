@@ -97,6 +97,7 @@ $specialstrings = array(
     'mma.files.privatefiles',
     'mm.login.invalidurl',
     'mm.core.search',
+    'mma.mod_feedback.continue_the_form',
 );
 
 foreach ($finalstrings as $key => $value) {
@@ -173,6 +174,8 @@ foreach ($finalstrings as $key => $value) {
         list($comp, $mod, $id) = explode(".", $key);
         $checkin = array(
             "/lang/en/moodle.php",
+            "/lang/en/message.php",
+            "/lang/en/search.php",
             "/lang/en/auth.php",
             "/lang/en/langconfig.php",
             "/lang/en/error.php",

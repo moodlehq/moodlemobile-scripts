@@ -43,7 +43,8 @@ $moodlestringfiles = array('my.php', 'moodle.php', 'error.php', 'repository.php'
                             'quizaccess_delaybetweenattempts.php', 'quizaccess_ipaddress.php', 'quizaccess_numattempts.php',
                             'quizaccess_openclosedate.php', 'quizaccess_password.php', 'quizaccess_safebrowser.php',
                             'quizaccess_securewindow.php', 'quizaccess_timelimit.php',
-                            'compentency.php', 'tool_lp.php', 'auth.php', 'langconfig.php', 'enrol_guest.php', 'block_myoverview.php'
+                            'compentency.php', 'tool_lp.php', 'auth.php', 'langconfig.php', 'enrol_guest.php', 'block_myoverview.php',
+                            'calendar.php'
                             );
 $numfound = 0;
 $numnotfound = 0;
@@ -57,12 +58,22 @@ foreach ($files as $f) {
         $languages[] = str_replace(".json", "", $f);
     }
 }
+$languages = array_unique($languages);
 
 $englishids = file_get_contents(JSON_FILES_PATH . "en.json");
 $englishids = (array) json_decode($englishids);
 $englishids = array_keys($englishids);
 
 $translated = array();
+
+$forcedstrings = array(
+    'mm.core.back' => 'moodle.php',
+    'mm.login.login' => 'moodle.php',
+    'mm.login.password' => 'moodle.php',
+    'mma.myoverview.pluginname' => 'block_myoverview.php',
+    'mm.core.download' => 'moodle.php',
+    'mm.core.previous' => 'moodle.php',
+);
 
 foreach ($moodlestringfiles as $stringfilename) {
 
@@ -94,7 +105,28 @@ foreach ($moodlestringfiles as $stringfilename) {
             if (strpos($id, ".") === false) {
                 continue;
             }
+
             list($type, $component, $plainid) = explode('.', $id);
+
+            if (isset($forcedstrings[$id])) {
+                if ($stringfilename == $forcedstrings[$id]) {
+                    $jsonstrings[$id] = str_replace('$a->', '$a.', $string[$plainid]);
+                    $jsonstrings[$id] = str_replace('{$a', '{{$a', $jsonstrings[$id]);
+                    $jsonstrings[$id] = str_replace('}', '}}', $jsonstrings[$id]);
+                    // Prevent double.
+                    $jsonstrings[$id] = str_replace(array('{{{', '}}}'), array('{{', '}}'), $jsonstrings[$id]);
+                    // Missing application of [^{]{\$a\.([^}]*)}[^}]
+                    $found = true;
+                    $numfound++;
+                    continue;
+                } else {
+                    continue;
+                }
+            }
+
+
+            continue;
+
 
             if ($component == 'myoverview') {
                 if ($stringfilename != 'block_myoverview.php') {
@@ -110,7 +142,7 @@ foreach ($moodlestringfiles as $stringfilename) {
                     $found = true;
                     $numfound++;
                     if (empty($string['pluginname'])) {
-                        echo "Missing pluginname in $lang / $stringfilename \n";
+                        //echo "Missing pluginname in $lang / $stringfilename \n";
                     } else if (empty($jsonstrings[$id])) {
                         $jsonstrings[$id] = $string['pluginname'];
                     }
@@ -125,8 +157,6 @@ foreach ($moodlestringfiles as $stringfilename) {
                     $ismoodleplugin = true;
                 }
             }
-
-
 
             if (!empty($string[$plainid]) and !empty($jsonstrings[$id])) {
                 if (trim($string[$plainid]) != trim($jsonstrings[$id]) && !isset($translated[$lang][$id])) {
