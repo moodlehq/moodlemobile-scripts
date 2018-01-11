@@ -1,0 +1,943 @@
+|-
+| auth_email || auth_email_get_signup_settings ||   3.2   ||   Get the signup required settings and profile fields.   || Yes || No || 
+|-
+| auth_email || auth_email_signup_user ||   3.2   ||   Adds a new user (pendingto be confirmed) in the site.   || Yes || No || 
+|-
+| core_auth || core_auth_confirm_user ||   3.2   ||   Confirm a user account.   || Yes || No || 
+|-
+| core_badges || core_badges_get_user_badges ||    3.1    ||    Returns the list of badges awarded to a user.    || No || Yes || moodle_mobile_app
+|-
+| core_block || core_block_get_course_blocks ||  3.3  ||  Returns blocks information for a course.  || No || Yes || moodle_mobile_app
+|-
+| core_calendar || core_calendar_create_calendar_events ||    2.5    ||    Create calendar events    || No || Yes || moodle_mobile_app
+|-
+| core_calendar || core_calendar_delete_calendar_events ||    2.5    ||    Delete calendar events    || No || Yes || moodle_mobile_app
+|-
+| core_calendar || core_calendar_get_action_events_by_course ||  3.3  ||  Get calendar action events by course  || Yes || Yes || moodle_mobile_app
+|-
+| core_calendar || core_calendar_get_action_events_by_courses ||  3.3  ||  Get calendar action events by courses  || Yes || Yes || moodle_mobile_app
+|-
+| core_calendar || core_calendar_get_action_events_by_timesort ||  3.3  ||  Get calendar action events by tiemsort  || Yes || Yes || moodle_mobile_app
+|-
+| core_calendar || core_calendar_get_calendar_events ||    2.5    ||    Get calendar events    || No || Yes || moodle_mobile_app
+|-
+| core_cohort || core_cohort_add_cohort_members ||    2.4    ||   Add members to cohort    || No || Yes || 
+|-
+| core_cohort || core_cohort_create_cohorts ||    2.4    ||   Create cohorts    || No || Yes || 
+|-
+| core_cohort || core_cohort_delete_cohort_members ||    2.4    ||   Delete members from cohort    || No || Yes || 
+|-
+| core_cohort || core_cohort_delete_cohorts ||    2.4    ||   Delete cohorts    || No || Yes || 
+|-
+| core_cohort || core_cohort_get_cohort_members ||    2.4    ||   Get cohort members    || No || Yes || 
+|-
+| core_cohort || core_cohort_get_cohorts ||    2.4    ||   Get cohorts    || No || Yes || 
+|-
+| core_cohort || core_cohort_update_cohorts ||    2.4    ||   Update cohorts    || No || Yes || 
+|-
+| core_comment || core_comment_get_comments ||    2.9    ||   Return all the comments for an specific component, context.    || No || Yes || moodle_mobile_app
+|-
+| core_competency || core_competency_add_competency_to_course ||    3.1    ||    Add competency to a course    || Yes || Yes || 
+|-
+| core_competency || core_competency_add_competency_to_plan ||    3.1    ||    Add a competency to a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_add_competency_to_template ||    3.1    ||    Add competency to a template    || Yes || Yes || 
+|-
+| core_competency || core_competency_add_related_competency ||    3.1    ||    Create a relationship between competencies    || Yes || Yes || 
+|-
+| core_competency || core_competency_approve_plan ||    3.1    ||    Approve a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_competency_framework_viewed ||    3.1    ||    Notify a competency framework as being viewed    || Yes || Yes || 
+|-
+| core_competency || core_competency_competency_viewed ||    3.1    ||    Report a competency as being viewed    || Yes || Yes || moodle_mobile_app
+|-
+| core_competency || core_competency_complete_plan ||    3.1    ||    Complete a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_count_competencies ||    3.1    ||    Count the competencies    || Yes || Yes || 
+|-
+| core_competency || core_competency_count_competencies_in_course ||    3.1    ||    Count competencies in a course    || Yes || Yes || 
+|-
+| core_competency || core_competency_count_competencies_in_template ||    3.1    ||    Count the competencies in a template    || Yes || Yes || 
+|-
+| core_competency || core_competency_count_competency_frameworks ||    3.1    ||    Count the competency frameworks    || Yes || Yes || 
+|-
+| core_competency || core_competency_count_courses_using_competency ||    3.1    ||    Count courses using a competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_count_templates ||    3.1    ||    Count templates    || Yes || Yes || 
+|-
+| core_competency || core_competency_count_templates_using_competency ||    3.1    ||    Count templates using a competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_create_competency ||    3.1    ||    Create a competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_create_competency_framework ||    3.1    ||    Create a competency framework    || Yes || Yes || 
+|-
+| core_competency || core_competency_create_plan ||    3.1    ||    Create a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_create_template ||    3.1    ||    Create a template    || Yes || Yes || 
+|-
+| core_competency || core_competency_create_user_evidence_competency ||    3.1    ||    Link an evidence of prior learning with a user's competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_delete_competency ||    3.1    ||    Delete a competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_delete_competency_framework ||    3.1    ||    Delete a competency framework    || Yes || Yes || 
+|-
+| core_competency || core_competency_delete_evidence ||    3.1    ||    Delete an evidence    || Yes || Yes || moodle_mobile_app
+|-
+| core_competency || core_competency_delete_plan ||    3.1    ||    Delete a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_delete_template ||    3.1    ||    Delete a template    || Yes || Yes || 
+|-
+| core_competency || core_competency_delete_user_evidence ||    3.1    ||    Delete an evidence of prior learning    || Yes || Yes || 
+|-
+| core_competency || core_competency_delete_user_evidence_competency ||    3.1    ||    Remove a link between an evidence of prior learning and a user's competency     || Yes || Yes || 
+|-
+| core_competency || core_competency_duplicate_competency_framework ||    3.1    ||    Duplicate a competency framework    || Yes || Yes || 
+|-
+| core_competency || core_competency_duplicate_template ||    3.1    ||    Duplicate a template    || Yes || Yes || 
+|-
+| core_competency || core_competency_get_scale_values ||    3.1    ||    Get the values for a scale    || Yes || Yes || moodle_mobile_app
+|-
+| core_competency || core_competency_grade_competency ||    3.1    ||    Rate a user's competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_grade_competency_in_course ||    3.1    ||    Rate a user's competency in a course    || Yes || Yes || moodle_mobile_app
+|-
+| core_competency || core_competency_grade_competency_in_plan ||    3.1    ||    Rate a user's competency in a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_list_competencies ||    3.1    ||    List competencies    || Yes || Yes || 
+|-
+| core_competency || core_competency_list_competencies_in_template ||    3.1    ||    List the competencies of a template    || Yes || Yes || 
+|-
+| core_competency || core_competency_list_competency_frameworks ||    3.1    ||    List the competency frameworks    || Yes || Yes || 
+|-
+| core_competency || core_competency_list_course_competencies ||    3.1    ||    List the competencies in a course    || Yes || Yes || moodle_mobile_app
+|-
+| core_competency || core_competency_list_plan_competencies ||    3.1    ||    List a learning plan's competencies    || Yes || Yes || 
+|-
+| core_competency || core_competency_list_templates ||    3.1    ||    List templates    || Yes || Yes || 
+|-
+| core_competency || core_competency_list_templates_using_competency ||    3.1    ||    List templates using a competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_list_user_plans ||    3.1    ||    List a user's learning plans    || Yes || Yes || 
+|-
+| core_competency || core_competency_move_down_competency ||    3.1    ||    Move a competency down in its branch    || Yes || Yes || 
+|-
+| core_competency || core_competency_move_up_competency ||    3.1    ||    Move a competency up in its branch    || Yes || Yes || 
+|-
+| core_competency || core_competency_plan_cancel_review_request ||    3.1    ||    Cancel the review request of a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_plan_request_review ||    3.1    ||    Request the review of a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_plan_start_review ||    3.1    ||    Start the review of a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_plan_stop_review ||    3.1    ||    Stop the review of a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_read_competency ||    3.1    ||    Fetch a competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_read_competency_framework ||    3.1    ||    Fetch a competency framework    || Yes || Yes || 
+|-
+| core_competency || core_competency_read_plan ||    3.1    ||    Fetch a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_read_template ||    3.1    ||    Fetch a template    || Yes || Yes || 
+|-
+| core_competency || core_competency_read_user_evidence ||    3.1    ||    Fetch an evidence of prior learning    || Yes || Yes || 
+|-
+| core_competency || core_competency_remove_competency_from_course ||    3.1    ||    Remove competency from a course    || Yes || Yes || 
+|-
+| core_competency || core_competency_remove_competency_from_plan ||    3.1    ||    Remove a competency from a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_remove_competency_from_template ||    3.1    ||    Remove competency from template    || Yes || Yes || 
+|-
+| core_competency || core_competency_remove_related_competency ||    3.1    ||    Remove a relationship between competencies    || Yes || Yes || 
+|-
+| core_competency || core_competency_reopen_plan ||    3.1    ||    Reopen a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_reorder_course_competency ||    3.1    ||    Reorder competencies in a course    || Yes || Yes || 
+|-
+| core_competency || core_competency_reorder_plan_competency ||    3.1    ||    Reopen a competency in a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_reorder_template_competency ||    3.1    ||    Reorder competencies in a template    || Yes || Yes || 
+|-
+| core_competency || core_competency_request_review_of_user_evidence_linked_competencies ||    3.1    ||    Request the review of the user's competencies linked to an evidence of prior learning    || Yes || Yes || 
+|-
+| core_competency || core_competency_search_competencies ||    3.1    ||    Search for competencies    || Yes || Yes || 
+|-
+| core_competency || core_competency_set_course_competency_ruleoutcome ||    3.1    ||    Set the rule of course competencies    || Yes || Yes || 
+|-
+| core_competency || core_competency_set_parent_competency ||    3.1    ||    Relocate a competency to another parent    || Yes || Yes || 
+|-
+| core_competency || core_competency_template_has_related_data ||    3.1    ||    Check whether a template has related data    || Yes || Yes || 
+|-
+| core_competency || core_competency_template_viewed ||    3.1    ||    Report a template as being viewed    || Yes || Yes || 
+|-
+| core_competency || core_competency_unapprove_plan ||    3.1    ||    Unapprove a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_unlink_plan_from_template ||    3.1    ||    Unlink a learning plan from a template    || Yes || Yes || 
+|-
+| core_competency || core_competency_update_competency ||    3.1    ||    Update a competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_update_competency_framework ||    3.1    ||    Update a competency framework    || Yes || Yes || 
+|-
+| core_competency || core_competency_update_course_competency_settings ||    3.1    ||    Update the course competency settings    || Yes || Yes || 
+|-
+| core_competency || core_competency_update_plan ||    3.1    ||    Update a learning plan    || Yes || Yes || 
+|-
+| core_competency || core_competency_update_template ||    3.1    ||    Update a template    || Yes || Yes || 
+|-
+| core_competency || core_competency_user_competency_cancel_review_request ||    3.1    ||    Cancel the review request of a user's competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_user_competency_plan_viewed ||    3.1    ||    Report the archive of user's competency as being viewed     || Yes || Yes || moodle_mobile_app
+|-
+| core_competency || core_competency_user_competency_request_review ||    3.1    ||    Request the review of a user's competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_user_competency_start_review ||    3.1    ||    Start the review of a user's competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_user_competency_stop_review ||    3.1    ||    Stop the review of a user's competency    || Yes || Yes || 
+|-
+| core_competency || core_competency_user_competency_viewed ||    3.1    ||    Report a user's competency as being viewed    || Yes || Yes || moodle_mobile_app
+|-
+| core_competency || core_competency_user_competency_viewed_in_course ||    3.1    ||    Report a user's competency as being viewed from a course    || Yes || Yes || moodle_mobile_app
+|-
+| core_competency || core_competency_user_competency_viewed_in_plan ||    3.1    ||    Report a user's competency as being viewed from a learning plan    || Yes || Yes || moodle_mobile_app
+|-
+| core_completion || core_completion_get_activities_completion_status ||    2.9    ||   Return the activities completion status for a user in a course.    || No || Yes || moodle_mobile_app
+|-
+| core_completion || core_completion_get_course_completion_status ||    2.9    ||   Returns course completion status.    || No || Yes || moodle_mobile_app
+|-
+| core_completion || core_completion_mark_course_self_completed ||    3.0    ||    Update the course completion status for the current user (if course self-completion is enabled).    || No || Yes || moodle_mobile_app
+|-
+| core_completion || core_completion_update_activity_completion_status_manually ||    2.9    ||   Update completion status for the current user in an activity, only for activities with manual tracking.    || No || Yes || moodle_mobile_app
+|-
+| core_course || core_course_check_updates ||   3.2   ||   Check if there is updates affecting the user for the given course and contexts.   || Yes || Yes || moodle_mobile_app
+|-
+| core_course || core_course_create_categories ||    2.3    ||    create categories    || No || Yes || 
+|-
+| core_course || core_course_create_courses ||    2.0    ||    Create new courses    || No || Yes || 
+|-
+| core_course || core_course_delete_categories ||    2.3    ||    delete categories    || No || Yes || 
+|-
+| core_course || core_course_delete_courses ||    2.3    ||    delete courses    || No || Yes || 
+|-
+| core_course || core_course_delete_modules ||    2.5    ||   Deletes all specified module instances    || No || Yes || 
+|-
+| core_course || core_course_duplicate_course ||    2.3    ||    duplicate a course    || No || Yes || 
+|-
+| core_course || core_course_edit_module ||  3.3  ||  Performs an action on course module (change visibility, duplicate, delete, etc.)  || Yes || Yes || 
+|-
+| core_course || core_course_edit_section ||  3.3  ||  Performs an action on course section (change visibility, set marker, delete)  || Yes || Yes || 
+|-
+| core_course || core_course_get_activities_overview ||   3.2   ||   Return activities overview for the given courses.   || No || Yes || moodle_mobile_app
+|-
+| core_course || core_course_get_categories ||    2.3    ||    get categories    || No || Yes || moodle_mobile_app
+|-
+| core_course || core_course_get_contents ||    2.2    ||    get course content (modules + web service file urls)    || No || Yes || moodle_mobile_app
+|-
+| core_course || core_course_get_course_module ||    3.0    ||    Return information about a course module.    || No || Yes || moodle_mobile_app
+|-
+| core_course || core_course_get_course_module_by_instance ||    3.0    ||    Return information about a given module name and instance id.    || No || Yes || moodle_mobile_app
+|-
+| core_course || core_course_get_courses ||    2.0    ||    Return course details    || Yes || Yes || moodle_mobile_app
+|-
+| core_course || core_course_get_courses_by_field ||   3.2   ||   Get courses matching a specific field (id/s, shortname, idnumber, category)   || No || Yes || moodle_mobile_app
+|-
+| core_course || core_course_get_module ||  3.3  ||  Returns html with one activity module on course page  || Yes || Yes || 
+|-
+| core_course || core_course_get_updates_since ||  3.3  ||  Check if there are updates affecting the user for the given course since the given time stamp.  || Yes || Yes || moodle_mobile_app
+|-
+| core_course || core_course_get_user_administration_options ||   3.2   ||   Return a list of administration options in a set of courses that are avaialable or not for the current                            user.   || No || Yes || moodle_mobile_app
+|-
+| core_course || core_course_get_user_navigation_options ||   3.2   ||   Return a list of navigation options in a set of courses that are avaialable or not for the current user.   || No || Yes || moodle_mobile_app
+|-
+| core_course || core_course_import_course ||    2.4    ||    Import course data from a course into another course. Does not include any user data.    || No || Yes || 
+|-
+| core_course || core_course_search_courses ||    3.0    ||    Search courses by (name, module, block, tag).    || Yes || Yes || moodle_mobile_app
+|-
+| core_course || core_course_update_categories ||    2.3    ||    update categories    || No || Yes || 
+|-
+| core_course || core_course_update_courses ||    2.5    ||    Update courses.    || No || Yes || 
+|-
+| core_course || core_course_view_course ||    2.9    ||   Log that the course was viewed    || No || Yes || moodle_mobile_app
+|-
+| core_enrol || core_enrol_get_course_enrolment_methods ||   3.0   ||   Get the list of course enrolment methods   || No || Yes || moodle_mobile_app
+|-
+| core_enrol || core_enrol_get_enrolled_users ||    2.1    ||    Get enrolled users by course id    || No || Yes || moodle_mobile_app
+|-
+| core_enrol || core_enrol_get_enrolled_users_with_capability ||    2.4    ||    For each course and capability specified, return a list of the users that are enrolled in the course and have that capability    || No || Yes || 
+|-
+| core_enrol || core_enrol_get_users_courses ||    2.0    ||    get list of course ids that a user is enrolled in (if you are allowed to see that)    || No || Yes || moodle_mobile_app
+|-
+| core_fetch || core_fetch_notifications ||    3.1    ||    Return a list of notifications for the current session    || Yes || No || 
+|-
+| core_files || core_files_get_files ||    2.0    ||    browse moodle files    || No || Yes || moodle_mobile_app
+|-
+| core_files || core_files_upload ||    2.2    ||    upload a file to moodle    || No || Yes || 
+|-
+| core_get || core_get_component_strings ||    2.4    ||    Return all raw strings (with {$a->xxx}) for a specific component - similar to core get_component_strings() call    || Yes || No || moodle_mobile_app
+|-
+| core_get || core_get_fragment ||    3.1    ||    Return a fragment for inclusion, such as a JavaScript page.    || Yes || Yes || 
+|-
+| core_get || core_get_string ||    2.4    ||    Return a translated string - similar to core get_string() call    || Yes || No || 
+|-
+| core_get || core_get_strings ||    2.4    ||    Return some translated strings - like several core get_string() calls    || Yes || No || 
+|-
+| core_get || core_get_user_dates ||  3.3  ||  Return formatted timestamps  || Yes || Yes || 
+|-
+| core_grade || core_grade_update_grades ||    2.7    ||    Update a grade item and associated student grades.   || No || Yes || 
+|-
+| core_grades || core_grades_get_grades ||    2.7    ||    Returns student course total grade and grades for activities. This function does not return category or manual items. This function is suitable for managers or teachers not students.   || No || Yes || 
+|-
+| core_grading || core_grading_get_definitions ||    2.6    ||    Returns grading definitions for the course module ids and areaname provided as parameters. An optionall activeonly parameter can be provided so that only the active grading method is returned.   || No || Yes || 
+|-
+| core_grading || core_grading_get_gradingform_instances ||    2.6    ||    Returns the instances and fillings for the requested definition id. An optional since parameter allows the number of records returned to be reduced so that only those with a timemodified value >= since are returned   || No || Yes || 
+|-
+| core_grading || core_grading_save_definitions ||    2.8    ||   Accepts an array of areas as a parameter. The areas contain grading definitions with criteria for inserting and updating   || No || Yes || 
+|-
+| core_group || core_group_add_group_members ||    2.0    ||    Adds group members    || No || Yes || 
+|-
+| core_group || core_group_assign_grouping ||    2.3    ||    assign groups from groupings    || No || Yes || 
+|-
+| core_group || core_group_create_groupings ||    2.3    ||    create groupings    || No || Yes || 
+|-
+| core_group || core_group_create_groups ||    2.0    ||    Creates new groups    || No || Yes || 
+|-
+| core_group || core_group_delete_group_members ||    2.0    ||    Deletes group members    || No || Yes || 
+|-
+| core_group || core_group_delete_groupings ||    2.3    ||    delete groupings    || No || Yes || 
+|-
+| core_group || core_group_delete_groups ||    2.0    ||    Deletes all specified groups    || No || Yes || 
+|-
+| core_group || core_group_get_activity_allowed_groups ||    3.0    ||    Gets a list of groups that the user is allowed to access within the specified activity.    || No || Yes || moodle_mobile_app
+|-
+| core_group || core_group_get_activity_groupmode ||    3.0    ||    Returns effective groupmode used in a given activity.    || No || Yes || moodle_mobile_app
+|-
+| core_group || core_group_get_course_groupings ||    2.3    ||    get all groupings in specified course    || No || Yes || 
+|-
+| core_group || core_group_get_course_groups ||    2.0    ||    Returns all groups in specified course    || No || Yes || 
+|-
+| core_group || core_group_get_course_user_groups ||    2.9    ||   Returns all groups in specified course for the specified user.    || No || Yes || moodle_mobile_app
+|-
+| core_group || core_group_get_group_members ||    2.0    ||    Returns group members    || No || Yes || 
+|-
+| core_group || core_group_get_groupings ||    2.3    ||    get groupings    || No || Yes || 
+|-
+| core_group || core_group_get_groups ||     2.0    ||    Returns group details.    || No || Yes || 
+|-
+| core_group || core_group_unassign_grouping ||    2.3    ||    unassign groups from groupings    || No || Yes || 
+|-
+| core_group || core_group_update_groupings ||    2.3    ||    update groupings    || No || Yes || 
+|-
+| core_message || core_message_block_contacts ||    2.5    ||    Block contacts    || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_create_contacts ||    2.5    ||    Add contacts to the contact list    || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_data_for_messagearea_contacts ||   3.2   ||   Retrieve the template data for the contact list   || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_data_for_messagearea_conversations ||   3.2   ||   Retrieve the template data for the conversation list   || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_data_for_messagearea_get_most_recent_message ||   3.2   ||   Retrieve the template data for the most recent message   || Yes || Yes || 
+|-
+| core_message || core_message_data_for_messagearea_get_profile ||   3.2   ||   Retrieve the template data for the users\'s profile   || Yes || Yes || 
+|-
+| core_message || core_message_data_for_messagearea_messages ||   3.2   ||   Retrieve the template data for the messages   || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_data_for_messagearea_search_messages ||   3.2   ||   Retrieve the template data for searching for messages   || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_data_for_messagearea_search_users ||   3.2   ||   Retrieve the template data for searching for people   || Yes || Yes || 
+|-
+| core_message || core_message_data_for_messagearea_search_users_in_course ||   3.2   ||   Retrieve the template data for searching for people in a course   || Yes || Yes || 
+|-
+| core_message || core_message_delete_contacts ||    2.5    ||    Remove contacts from the contact list    || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_delete_conversation ||   3.2   ||   Deletes a conversation.   || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_delete_message ||    3.1    ||    Deletes a message.    || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_get_blocked_users ||    2.9    ||   Retrieve a list of users blocked    || No || Yes || moodle_mobile_app
+|-
+| core_message || core_message_get_contacts ||    2.5    ||    Retrieve the contact list    || No || Yes || moodle_mobile_app
+|-
+| core_message || core_message_get_message_processor ||   3.2   ||   Get a message processor   || Yes || Yes || 
+|-
+| core_message || core_message_get_messages ||    2.8    ||   Retrieve a list of messages sent and received by a user (conversations, notifications or both)    || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_get_unread_conversations_count ||   3.2   ||   Retrieve the count of unread conversations for a given user   || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_get_user_message_preferences ||   3.2   ||   Get the message preferences for a given user.   || No || Yes || moodle_mobile_app
+|-
+| core_message || core_message_get_user_notification_preferences ||   3.2   ||   Get the notification preferences for a given user.   || No || Yes || moodle_mobile_app
+|-
+| core_message || core_message_mark_all_messages_as_read ||   3.2   ||   Mark all messages as read for a given user   || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_mark_all_notifications_as_read ||   3.2   ||   Mark all notifications as read for a given user   || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_mark_message_read ||    2.9    ||   Mark a single message as read, trigger message_viewed event.    || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_message_processor_config_form ||   3.2   ||   Process the message processor config form   || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_search_contacts ||    2.5    ||    Search for contacts    || No || Yes || moodle_mobile_app
+|-
+| core_message || core_message_send_instant_messages ||    2.1    ||    Send instant messages    || Yes || Yes || moodle_mobile_app
+|-
+| core_message || core_message_unblock_contacts ||    2.5    ||    Unblock contacts    || Yes || Yes || moodle_mobile_app
+|-
+| core_notes || core_notes_create_notes ||    2.1    ||    Create notes    || No || Yes || moodle_mobile_app
+|-
+| core_notes || core_notes_delete_notes ||    2.5    ||    Delete Notes    || No || Yes || moodle_mobile_app
+|-
+| core_notes || core_notes_get_course_notes ||    2.9    ||   Returns all notes in specified course (or site) for the specified user.    || No || Yes || moodle_mobile_app
+|-
+| core_notes || core_notes_get_notes ||    2.5    ||    Retrieve Notes    || No || Yes || 
+|-
+| core_notes || core_notes_update_notes ||    2.5    ||    Update Notes    || No || Yes || 
+|-
+| core_notes || core_notes_view_notes ||    2.9    ||   Simulates the web interface view of notes/index.php: trigger events.    || No || Yes || moodle_mobile_app
+|-
+| core_output || core_output_load_fontawesome_icon_map ||  3.3  ||  Load the mapping of names to icons  || Yes || No || 
+|-
+| core_output || core_output_load_template ||   3.0   ||   Load a template for a renderable   || Yes || No || 
+|-
+| core_question || core_question_update_flag ||    3.1    ||    Update the flag state of a question attempt.    || No || Yes || moodle_mobile_app
+|-
+| core_rating || core_rating_add_rating ||   3.2   ||   Rates an item.   || No || Yes || moodle_mobile_app
+|-
+| core_rating || core_rating_get_item_ratings ||    2.9    ||   Retrieve all the ratings for an item.    || No || Yes || moodle_mobile_app
+|-
+| core_role || core_role_assign_roles ||    2.0    ||    Manual role assignments    || No || Yes || 
+|-
+| core_role || core_role_unassign_roles ||    2.0    ||    Manual role unassignments    || No || Yes || 
+|-
+| core_tag || core_tag_get_tagindex ||    3.1    ||    Gets tag index page for one tag and one tag area    || Yes || Yes || 
+|-
+| core_tag || core_tag_get_tags ||   3.0   ||   Gets tags by their ids   || Yes || Yes || 
+|-
+| core_tag || core_tag_update_tags ||   3.0   ||   Updates tags   || Yes || Yes || 
+|-
+| core_update || core_update_inplace_editable ||    3.1    ||    Generic service to update title    || Yes || Yes || 
+|-
+| core_user || core_user_add_user_device ||    2.6    ||   Store mobile user devices information for PUSH Notifications.    || No || Yes || moodle_mobile_app
+|-
+| core_user || core_user_add_user_private_files ||   2.6   ||   Copy files from a draft area to users private files area.   || No || Yes || moodle_mobile_app
+|-
+| core_user || core_user_agree_site_policy ||   3.2   ||   Agree the site policy for the current user.   || No || Yes || moodle_mobile_app
+|-
+| core_user || core_user_create_users ||    2.0    ||    Create users - admin function    || No || Yes || 
+|-
+| core_user || core_user_delete_users ||    2.0    ||    Delete users - admin function    || No || Yes || 
+|-
+| core_user || core_user_get_course_user_profiles ||    2.1    ||    Get course user profiles by id    || No || Yes || moodle_mobile_app
+|-
+| core_user || core_user_get_user_preferences ||   3.2   ||   Return user preferences.   || No || Yes || moodle_mobile_app
+|-
+| core_user || core_user_get_users ||    2.5    ||    Search users. - If you want to get multiple users for one specific field, use core_user_get_users_by_field(), it's designed for this purpose and it should be faster.    || No || Yes || 
+|-
+| core_user || core_user_get_users_by_field ||    2.5    ||    Retrieve users information for a specified unique field - If you want to do a user search, use core_user_get_users()    || Yes || Yes || moodle_mobile_app
+|-
+| core_user || core_user_get_users_by_id ||    2.0    ||    Get users by id    || No || Yes || 
+|-
+| core_user || core_user_remove_user_device ||    2.9    ||   Remove a user device from the Moodle database.    || No || Yes || moodle_mobile_app
+|-
+| core_user || core_user_set_user_preferences ||   3.2   ||   Set user preferences.   || No || Yes || 
+|-
+| core_user || core_user_update_picture ||   3.2   ||   Update or delete the user picture in the site   || No || Yes || moodle_mobile_app
+|-
+| core_user || core_user_update_user_preferences ||   3.2   ||   Update a user\'s preferences   || Yes || Yes || moodle_mobile_app
+|-
+| core_user || core_user_update_users ||    2.0    ||    Update users    || Yes || Yes || 
+|-
+| core_user || core_user_view_user_list ||    2.9    ||   Simulates the web-interface view of user/index.php (triggering events).    || No || Yes || moodle_mobile_app
+|-
+| core_user || core_user_view_user_profile ||    2.9    ||   Simulates the web-interface view of user/view.php and user/profile.php (triggering events).    || No || Yes || moodle_mobile_app
+|-
+| core_webservice || core_webservice_get_site_info ||    2.1    ||    Return some site info / user info / list web service functions    || No || Yes || moodle_mobile_app
+|-
+| enrol_guest || enrol_guest_get_instance_info ||    3.1    ||    Return guest enrolment instance information.    || No || Yes || moodle_mobile_app
+|-
+| enrol_manual || enrol_manual_enrol_users ||    2.0    ||    Manual enrol users    || No || Yes || 
+|-
+| enrol_manual || enrol_manual_unenrol_users ||   3.0   ||   Manual unenrol users   || No || Yes || 
+|-
+| enrol_self || enrol_self_enrol_user ||    3.0    ||    Self enrol the current user in the given course.    || No || Yes || moodle_mobile_app
+|-
+| enrol_self || enrol_self_get_instance_info ||   3.0   ||   self enrolment instance information.   || No || Yes || moodle_mobile_app
+|-
+| gradereport_overview || gradereport_overview_get_course_grades ||   3.2   ||   Get the given user courses final grades   || No || Yes || moodle_mobile_app
+|-
+| gradereport_overview || gradereport_overview_view_grade_report ||   3.2   ||   Trigger the report view event   || No || Yes || moodle_mobile_app
+|-
+| gradereport_user || gradereport_user_get_grade_items ||   3.2   ||   Returns the complete list of grade items for users in a course   || No || Yes || moodle_mobile_app
+|-
+| gradereport_user || gradereport_user_get_grades_table ||    2.9    ||   Get the user/s report grades table for a course    || No || Yes || moodle_mobile_app
+|-
+| gradereport_user || gradereport_user_view_grade_report ||    2.9    ||   Trigger the grade_report_viewed event when a user view his grade report (this web service will be initially used by the mobile app so information can be logged in the Moodle side when a user see the same page in the app).    || No || Yes || moodle_mobile_app
+|-
+| message_airnotifier || message_airnotifier_are_notification_preferences_configured ||   2.7   ||   Check if the users have notification preferences configured yet   || No || Yes || moodle_mobile_app
+|-
+| message_airnotifier || message_airnotifier_enable_device ||   3.2   ||   Enables or disables a registered user device so it can receive Push notifications   || No || Yes || moodle_mobile_app
+|-
+| message_airnotifier || message_airnotifier_get_user_devices ||   3.2   ||   Return the list of mobile devices that are registered in Moodle for the given user   || No || Yes || moodle_mobile_app
+|-
+| message_airnotifier || message_airnotifier_is_system_configured ||   2.7   ||   Check whether the airnotifier settings have been configured   || No || Yes || moodle_mobile_app
+|-
+| message_popup || message_popup_get_popup_notifications ||   3.2   ||   Retrieve a list of popup notifications for a user   || Yes || Yes || moodle_mobile_app
+|-
+| message_popup || message_popup_get_unread_popup_notification_count ||   3.2   ||   Retrieve the count of unread popup notifications for a given user   || Yes || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_copy_previous_attempt ||    2.6    ||    Copy a students previous attempt to a new attempt.    || No || Yes || 
+|-
+| mod_assign || mod_assign_get_assignments ||    2.4    ||    Returns the courses and assignments for the users capability    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_get_grades ||    2.4    ||    Returns grades from the assignment    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_get_participant ||    3.1    ||    Get a participant for an assignment, with some summary info about their submissions.   || Yes || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_get_submission_status ||    3.1    ||    Returns information about an assignment submission status for a given user.    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_get_submissions ||    2.5    ||    Returns the submissions for assignments    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_get_user_flags ||    2.6    ||    Returns the user_flags for assignments    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_get_user_mappings ||    2.6    ||    Returns the user_mappings for assignments    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_list_participants ||    3.1    ||    List the participants for a single assignment, with some summary info about their submissions.    || Yes || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_lock_submissions ||    2.6    ||    Prevent students from making changes to a list of submissions    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_reveal_identities ||    2.6    ||    Reveal the identities for a blind marking assignment    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_revert_submissions_to_draft ||    2.6    ||    Reverts the list of submissions to draft status    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_save_grade ||    2.6    ||    Save a grade update for a single student.    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_save_grades ||    2.7    ||    Save grade updates for one or more students.    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_save_submission ||    2.6    ||    Update the current students submission    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_save_user_extensions ||    2.6    ||    Save a list of assignment extensions    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_set_user_flags ||    2.6    ||    Sets the specified user_flags for an assignment    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_submit_for_grading ||    2.6    ||    Submit the current students assignment for grading    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_submit_grading_form ||    3.1    ||    Submit the grading form data via ajax    || Yes || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_unlock_submissions ||    2.6    ||    Allow students to make changes to a list of submissions    || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_view_assign ||   3.2   ||   Update the module completion status.   || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_view_grading_table ||   3.0   ||   Trigger the grading_table_viewed event.   || No || Yes || moodle_mobile_app
+|-
+| mod_assign || mod_assign_view_submission_status ||    3.1    ||    Trigger the submission status viewed event.    || No || Yes || moodle_mobile_app
+|-
+| mod_book || mod_book_get_books_by_courses ||    3.0    ||    Returns a list of book instances in a provided set of courses.    || No || Yes || moodle_mobile_app
+|-
+| mod_book || mod_book_view_book ||    3.0    ||    Trigger the course module viewed event and update the module completion status.    || No || Yes || moodle_mobile_app
+|-
+| mod_chat || mod_chat_get_chat_latest_messages ||    3.0    ||    Get the latest messages from the given chat sessio.    || No || Yes || moodle_mobile_app
+|-
+| mod_chat || mod_chat_get_chat_users ||    3.0    ||    Get the list of users in the given chat session.    || No || Yes || moodle_mobile_app
+|-
+| mod_chat || mod_chat_get_chats_by_courses ||    3.0    ||    Returns a list of chat instances in a provided set of courses.    || No || Yes || moodle_mobile_app
+|-
+| mod_chat || mod_chat_login_user ||    3.0    ||    Log a user into a chat room in the given chat.    || No || Yes || moodle_mobile_app
+|-
+| mod_chat || mod_chat_send_chat_message ||    3.0    ||    Send a message on the given chat session.    || No || Yes || moodle_mobile_app
+|-
+| mod_chat || mod_chat_view_chat ||    3.0    ||    Trigger the course module viewed event and update the module completion status.    || No || Yes || moodle_mobile_app
+|-
+| mod_choice || mod_choice_delete_choice_responses ||    3.0    ||    Delete the given submitted responses in a choice.    || No || Yes || moodle_mobile_app
+|-
+| mod_choice || mod_choice_get_choice_options ||    3.0    ||    Retrieve options for a specific choice.    || No || Yes || moodle_mobile_app
+|-
+| mod_choice || mod_choice_get_choice_results ||    3.0    ||    Retrieve users results for a given choice.    || No || Yes || moodle_mobile_app
+|-
+| mod_choice || mod_choice_get_choices_by_courses ||    3.0    ||    Returns a list of choice instances in a provided set of courses.    || No || Yes || moodle_mobile_app
+|-
+| mod_choice || mod_choice_submit_choice_response ||    3.0    ||    Submit responses to a specific choice item.    || No || Yes || moodle_mobile_app
+|-
+| mod_choice || mod_choice_view_choice ||    3.0    ||    Trigger the course module viewed event and update the module completion status..    || No || Yes || moodle_mobile_app
+|-
+| mod_data || mod_data_add_entry ||  3.3  ||  Adds a new entry.  || No || Yes || moodle_mobile_app
+|-
+| mod_data || mod_data_approve_entry ||  3.3  ||  Approves or unapproves an entry.  || No || Yes || moodle_mobile_app
+|-
+| mod_data || mod_data_delete_entry ||  3.3  ||  Deletes an entry.  || No || Yes || moodle_mobile_app
+|-
+| mod_data || mod_data_get_data_access_information ||  3.3  ||  Return access information for a given database.  || No || Yes || moodle_mobile_app
+|-
+| mod_data || mod_data_get_databases_by_courses ||    2.9    ||   Returns a list of database instances in a provided set of courses, if no courses are provided then all the database instances the user has access to will be returned.    || No || Yes || moodle_mobile_app
+|-
+| mod_data || mod_data_get_entries ||  3.3  ||  Return the complete list of entries of the given database.  || No || Yes || moodle_mobile_app
+|-
+| mod_data || mod_data_get_entry ||  3.3  ||  Return one entry record from the database, including contents optionally.  || No || Yes || moodle_mobile_app
+|-
+| mod_data || mod_data_get_fields ||  3.3  ||  Return the list of configured fields for the given database.  || No || Yes || moodle_mobile_app
+|-
+| mod_data || mod_data_search_entries ||  3.3  ||  Search for entries in the given database.  || No || Yes || moodle_mobile_app
+|-
+| mod_data || mod_data_update_entry ||  3.3  ||  Updates an existing entry.  || No || Yes || moodle_mobile_app
+|-
+| mod_data || mod_data_view_database ||  3.3  ||  Simulate the view.php web interface data: trigger events, completion, etc...  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_get_analysis ||  3.3  ||  Retrieves the feedback analysis.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_get_current_completed_tmp ||  3.3  ||  Returns the temporary completion record for the current user.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_get_feedback_access_information ||  3.3  ||  Return access information for a given feedback.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_get_feedbacks_by_courses ||  3.3  ||  Returns a list of feedbacks in a provided list of courses, if no list is provided all feedbacks that                            the user can view will be returned.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_get_finished_responses ||  3.3  ||  Retrieves responses from the last finished attempt.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_get_items ||  3.3  ||  Returns the items (questions) in the given feedback.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_get_last_completed ||  3.3  ||  Retrieves the last completion record for the current user.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_get_non_respondents ||  3.3  ||  Retrieves a list of students who didn\'t submit the feedback.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_get_page_items ||  3.3  ||  Get a single feedback page items.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_get_responses_analysis ||  3.3  ||  Return the feedback user responses analysis.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_get_unfinished_responses ||  3.3  ||  Retrieves responses from the current unfinished attempt.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_launch_feedback ||  3.3  ||  Starts or continues a feedback submission.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_process_page ||  3.3  ||  Process a jump between pages.  || No || Yes || moodle_mobile_app
+|-
+| mod_feedback || mod_feedback_view_feedback ||  3.3  ||  Trigger the course module viewed event and update the module completion status.  || No || Yes || moodle_mobile_app
+|-
+| mod_folder || mod_folder_get_folders_by_courses ||  3.3  ||  Returns a list of folders in a provided list of courses, if no list is provided all folders that                            the user can view will be returned. Please note that this WS is not returning the folder contents.  || No || Yes || moodle_mobile_app
+|-
+| mod_folder || mod_folder_view_folder ||    3.0    ||    Trigger the course module viewed event and update the module completion status.    || No || Yes || moodle_mobile_app
+|-
+| mod_forum || mod_forum_add_discussion ||    3.0    ||    Add a new discussion into an existing forum.    || No || Yes || moodle_mobile_app
+|-
+| mod_forum || mod_forum_add_discussion_post ||    3.0    ||    Create new posts into an existing discussion.    || No || Yes || moodle_mobile_app
+|-
+| mod_forum || mod_forum_can_add_discussion ||    3.1    ||    Check if the current user can add discussions in the given forum (and optionally for the given group).    || No || Yes || moodle_mobile_app
+|-
+| mod_forum || mod_forum_get_forum_discussion_posts ||    2.7    ||   Returns a list of forum posts for a discussion.    || No || Yes || moodle_mobile_app
+|-
+| mod_forum || mod_forum_get_forum_discussions_paginated ||    2.8    ||   Returns a list of forum discussions optionally sorted and paginated.    || No || Yes || moodle_mobile_app
+|-
+| mod_forum || mod_forum_get_forums_by_courses ||    2.5    ||    Returns a list of forum instances in a provided set of courses, if no courses are provided then all the forum instances the user has access to will be returned.    || No || Yes || moodle_mobile_app
+|-
+| mod_forum || mod_forum_view_forum ||    2.9    ||   Trigger the course_module_viewed event when a user view a forum (this web service will be initially used by the mobile app so information can be logged in the Moodle side when a user see the same page in the app).    || No || Yes || moodle_mobile_app
+|-
+| mod_forum || mod_forum_view_forum_discussion ||    2.9    ||   Trigger the discussion_viewed event when a user view a forum discussion (this web service will be initially used by the mobile app so information can be logged in the Moodle side when a user see the same page in the app).    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_add_entry ||   3.2   ||   Add a new entry to a given glossary   || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_authors ||    3.1    ||    Get the authors in a glossary    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_categories ||    3.1    ||    Get a glossary's categories    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_entries_by_author ||    3.1    ||    Get entries using author filtering    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_entries_by_author_id ||    3.1    ||    Get entries using author ID filtering    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_entries_by_category ||    3.1    ||    Get entries using category filtering    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_entries_by_date ||    3.1    ||    Get entries using date filtering    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_entries_by_letter ||    3.1    ||    Get entries using letter filtering    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_entries_by_search ||    3.1    ||    Get entries matching a search query    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_entries_by_term ||    3.1    ||    Get entries using term filtering    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_entries_to_approve ||    3.1    ||    Get entries to be approved    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_entry_by_id ||    3.1    ||    Get an entry by ID    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_get_glossaries_by_courses ||    3.1    ||    Get the glossaries in courses    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_view_entry ||    3.1    ||    Notify that a glossary entry was viewed    || No || Yes || moodle_mobile_app
+|-
+| mod_glossary || mod_glossary_view_glossary ||    3.1    ||    Notify that a glossary was viewed    || No || Yes || moodle_mobile_app
+|-
+| mod_imscp || mod_imscp_get_imscps_by_courses ||    3.0    ||    Returns a list of imscp instances in a provided set of courses.    || No || Yes || moodle_mobile_app
+|-
+| mod_imscp || mod_imscp_view_imscp ||    3.0    ||    Trigger the course module viewed event and update the module completion status.    || No || Yes || moodle_mobile_app
+|-
+| mod_label || mod_label_get_labels_by_courses ||  3.3  ||  Returns a list of labels in a provided list of courses, if no list is provided all labels that the user                            can view will be returned.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_finish_attempt ||  3.3  ||  Finishes the current attempt.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_attempts_overview ||  3.3  ||  Get a list of all the attempts made by users in a lesson.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_content_pages_viewed ||  3.3  ||  Return the list of content pages viewed by a user during a lesson attempt.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_lesson ||  3.3  ||  Return information of a given lesson.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_lesson_access_information ||  3.3  ||  Return access information for a given lesson.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_lessons_by_courses ||  3.3  ||  Returns a list of lessons in a provided list of courses,                            if no list is provided all lessons that the user can view will be returned.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_page_data ||  3.3  ||  Return information of a given page, including its contents.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_pages ||  3.3  ||  Return the list of pages in a lesson (based on the user permissions).  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_pages_possible_jumps ||  3.3  ||  Return all the possible jumps for the pages in a given lesson.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_questions_attempts ||  3.3  ||  Return the list of questions attempts in a given lesson.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_user_attempt ||  3.3  ||  Return information about the given user attempt (including answers).  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_user_attempt_grade ||  3.3  ||  Return grade information in the attempt for a given user.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_user_grade ||  3.3  ||  Return the final grade in the lesson for the given user.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_get_user_timers ||  3.3  ||  Return the timers in the current lesson for the given user.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_launch_attempt ||  3.3  ||  Starts a new attempt or continues an existing one.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_process_page ||  3.3  ||  Processes page responses.  || No || Yes || moodle_mobile_app
+|-
+| mod_lesson || mod_lesson_view_lesson ||  3.3  ||  Trigger the course module viewed event and update the module completion status.  || No || Yes || moodle_mobile_app
+|-
+| mod_lti || mod_lti_create_tool_proxy ||    3.1    ||    Create a tool proxy    || Yes || Yes || 
+|-
+| mod_lti || mod_lti_create_tool_type ||    3.1    ||    Create a tool type    || Yes || Yes || 
+|-
+| mod_lti || mod_lti_delete_tool_proxy ||    3.1    ||    Delete a tool proxy    || Yes || Yes || 
+|-
+| mod_lti || mod_lti_delete_tool_type ||    3.1    ||    Delete a tool type    || Yes || Yes || 
+|-
+| mod_lti || mod_lti_get_ltis_by_courses ||    3.0    ||    Returns a list of lti instances in a provided set of courses.    || No || Yes || moodle_mobile_app
+|-
+| mod_lti || mod_lti_get_tool_launch_data ||    3.0    ||    Return the launch data for a given external tool.    || No || Yes || moodle_mobile_app
+|-
+| mod_lti || mod_lti_get_tool_proxies ||    3.1    ||    Get a list of the tool proxies    || Yes || Yes || 
+|-
+| mod_lti || mod_lti_get_tool_proxy_registration_request ||    3.1    ||    Get a registration request for a tool proxy    || Yes || Yes || 
+|-
+| mod_lti || mod_lti_get_tool_types ||    3.1    ||    Get a list of the tool types    || Yes || Yes || 
+|-
+| mod_lti || mod_lti_is_cartridge ||    3.1    ||    Determine if the given url is for a cartridge    || Yes || Yes || 
+|-
+| mod_lti || mod_lti_update_tool_type ||    3.1    ||    Update a tool type    || Yes || Yes || 
+|-
+| mod_lti || mod_lti_view_lti ||    3.0    ||    Trigger the course module viewed event and update the module completion status.    || No || Yes || moodle_mobile_app
+|-
+| mod_page || mod_page_get_pages_by_courses ||  3.3  ||  Returns a list of pages in a provided list of courses, if no list is provided all pages that the user                            can view will be returned.  || No || Yes || moodle_mobile_app
+|-
+| mod_page || mod_page_view_page ||    3.0    ||    Trigger the course module viewed event and update the module completion status.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_get_attempt_access_information ||    3.1    ||    Return access information for a given attempt in a quiz.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_get_attempt_data ||    3.1    ||    Returns information for the given attempt page for a quiz attempt in progress.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_get_attempt_review ||    3.1    ||    Returns review information for the given finished attempt, can be used by users or teachers.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_get_attempt_summary ||    3.1    ||    Returns a summary of a quiz attempt before it is submitted.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_get_combined_review_options ||    3.1    ||    Combines the review options from a number of different quiz attempts.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_get_quiz_access_information ||    3.1    ||    Return access information for a given quiz.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_get_quiz_feedback_for_grade ||    3.1    ||    Get the feedback text that should be show to a student who got the given grade in the given quiz.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_get_quiz_required_qtypes ||    3.1    ||    Return the potential question types that would be required for a given quiz.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_get_quizzes_by_courses ||    3.1    ||    Returns a list of quizzes in a provided list of courses, if no list is provided all quizzes that the user can view will be returned.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_get_user_attempts ||    3.1    ||    Return a list of attempts for the given quiz and user.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_get_user_best_grade ||    3.1    ||    Get the best current grade for the given user on a quiz.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_process_attempt ||    3.1    ||    Process responses during an attempt at a quiz and also deals with attempts finishing.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_save_attempt ||    3.1    ||    Processes save requests during the quiz.This function is intended for the quiz auto-save feature.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_start_attempt ||    3.1    ||    Starts a new attempt at a quiz.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_view_attempt ||    3.1    ||    Trigger the attempt viewed event.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_view_attempt_review ||    3.1    ||    Trigger the attempt reviewed event.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_view_attempt_summary ||    3.1    ||    Trigger the attempt summary viewed event.    || No || Yes || moodle_mobile_app
+|-
+| mod_quiz || mod_quiz_view_quiz ||    3.1    ||    Trigger the course module viewed event and update the module completion status.    || No || Yes || moodle_mobile_app
+|-
+| mod_resource || mod_resource_get_resources_by_courses ||  3.3  ||  Returns a list of files in a provided list of courses, if no list is provided all files that                            the user can view will be returned.  || No || Yes || moodle_mobile_app
+|-
+| mod_resource || mod_resource_view_resource ||    3.0    ||    Trigger the course module viewed event and update the module completion status.    || No || Yes || moodle_mobile_app
+|-
+| mod_scorm || mod_scorm_get_scorm_attempt_count ||    3.0    ||    Return the number of attempts done by a user in the given SCORM.    || No || Yes || moodle_mobile_app
+|-
+| mod_scorm || mod_scorm_get_scorm_sco_tracks ||    3.0    ||    Retrieves SCO tracking data for the given user id and attempt number.    || No || Yes || moodle_mobile_app
+|-
+| mod_scorm || mod_scorm_get_scorm_scoes ||    3.0    ||    Returns a list containing all the scoes data related to the given scorm id.    || No || Yes || moodle_mobile_app
+|-
+| mod_scorm || mod_scorm_get_scorm_user_data ||    3.0    ||    Retrieves user tracking and SCO data and default SCORM values.    || No || Yes || moodle_mobile_app
+|-
+| mod_scorm || mod_scorm_get_scorms_by_courses ||    3.0    ||    Returns a list of scorm instances in a provided set of courses.    || No || Yes || moodle_mobile_app
+|-
+| mod_scorm || mod_scorm_insert_scorm_tracks ||    3.0    ||    Saves a scorm tracking record.    || No || Yes || moodle_mobile_app
+|-
+| mod_scorm || mod_scorm_launch_sco ||    3.1    ||    Trigger the SCO launched event.    || No || Yes || moodle_mobile_app
+|-
+| mod_scorm || mod_scorm_view_scorm ||    3.0    ||    Trigger the course module viewed event and update the module completion status..    || No || Yes || moodle_mobile_app
+|-
+| mod_survey || mod_survey_get_questions ||   3.0   ||   Get the complete list of questions for the survey, including subquestions.   || No || Yes || moodle_mobile_app
+|-
+| mod_survey || mod_survey_get_surveys_by_courses ||   3.0   ||   Returns a list of survey instances in a provided set of courses, if no courses are provided then all the survey instances the user has access to will be returned.   || No || Yes || moodle_mobile_app
+|-
+| mod_survey || mod_survey_submit_answers ||   3.0   ||   Submit the answers for a given survey.   || No || Yes || moodle_mobile_app
+|-
+| mod_survey || mod_survey_view_survey ||   3.0   ||   Trigger the course module viewed event and update the module completion status.   || No || Yes || moodle_mobile_app
+|-
+| mod_url || mod_url_get_urls_by_courses ||  3.3  ||  Returns a list of urls in a provided list of courses, if no list is provided all urls that the user                            can view will be returned.  || No || Yes || moodle_mobile_app
+|-
+| mod_url || mod_url_view_url ||    3.0    ||    Trigger the course module viewed event and update the module completion status.    || No || Yes || moodle_mobile_app
+|-
+| mod_wiki || mod_wiki_edit_page ||    3.1    ||    Save the contents of a page.    || No || Yes || moodle_mobile_app
+|-
+| mod_wiki || mod_wiki_get_page_contents ||    3.1    ||    Returns the contents of a page.    || No || Yes || moodle_mobile_app
+|-
+| mod_wiki || mod_wiki_get_page_for_editing ||    3.1    ||    Locks and retrieves info of page-section to be edited.    || No || Yes || moodle_mobile_app
+|-
+| mod_wiki || mod_wiki_get_subwiki_files ||    3.1    ||    Returns the list of files for a specific subwiki.    || No || Yes || moodle_mobile_app
+|-
+| mod_wiki || mod_wiki_get_subwiki_pages ||    3.1    ||    Returns the list of pages for a specific subwiki.    || No || Yes || moodle_mobile_app
+|-
+| mod_wiki || mod_wiki_get_subwikis ||    3.1    ||    Returns the list of subwikis the user can see in a specific wiki.    || No || Yes || moodle_mobile_app
+|-
+| mod_wiki || mod_wiki_get_wikis_by_courses ||    3.1    ||    Returns a list of wiki instances in a provided set of courses, if no courses are provided then all the wiki instances the user has access to will be returned.    || No || Yes || moodle_mobile_app
+|-
+| mod_wiki || mod_wiki_new_page ||    3.1    ||    Create a new page in a subwiki.    || No || Yes || moodle_mobile_app
+|-
+| mod_wiki || mod_wiki_view_page ||    3.1    ||    Trigger the page viewed event and update the module completion status.    || No || Yes || moodle_mobile_app
+|-
+| mod_wiki || mod_wiki_view_wiki ||    3.1    ||    Trigger the course module viewed event and update the module completion status.    || No || Yes || moodle_mobile_app
+|-
+| report_competency || report_competency_data_for_report ||    3.1    ||    Load the data for the competency report in a course.    || Yes || Yes || 
+|-
+| tool_lp || tool_lp_data_for_competencies_manage_page ||    3.1    ||    Load the data for the competencies manage page template    || Yes || Yes || 
+|-
+| tool_lp || tool_lp_data_for_competency_frameworks_manage_page ||    3.1    ||    Load the data for the competency frameworks manage page template    || Yes || Yes || 
+|-
+| tool_lp || tool_lp_data_for_competency_summary ||    3.1    ||    Load competency data for summary template.    || Yes || Yes || 
+|-
+| tool_lp || tool_lp_data_for_course_competencies_page ||    3.1    ||    Load the data for the course competencies page template.    || Yes || Yes || moodle_mobile_app
+|-
+| tool_lp || tool_lp_data_for_plan_page ||    3.1    ||    Load the data for the plan page template.    || Yes || Yes || moodle_mobile_app
+|-
+| tool_lp || tool_lp_data_for_plans_page ||    3.1    ||    Load the data for the plans page template    || Yes || Yes || moodle_mobile_app
+|-
+| tool_lp || tool_lp_data_for_related_competencies_section ||    3.1    ||    Load the data for the related competencies template.    || Yes || Yes || 
+|-
+| tool_lp || tool_lp_data_for_template_competencies_page ||    3.1    ||    Load the data for the template competencies page template.    || Yes || Yes || 
+|-
+| tool_lp || tool_lp_data_for_templates_manage_page ||    3.1    ||    Load the data for the learning plan templates manage page template    || Yes || Yes || 
+|-
+| tool_lp || tool_lp_data_for_user_competency_summary ||    3.1    ||    Load a summary of a user competency.    || Yes || Yes || moodle_mobile_app
+|-
+| tool_lp || tool_lp_data_for_user_competency_summary_in_course ||    3.1    ||    Load a summary of a user competency.    || Yes || Yes || moodle_mobile_app
+|-
+| tool_lp || tool_lp_data_for_user_competency_summary_in_plan ||    3.1    ||    Load a summary of a user competency.    || Yes || Yes || moodle_mobile_app
+|-
+| tool_lp || tool_lp_data_for_user_evidence_list_page ||    3.1    ||    Load the data for the user evidence list page template    || Yes || Yes || moodle_mobile_app
+|-
+| tool_lp || tool_lp_data_for_user_evidence_page ||    3.1    ||    Load the data for the user evidence page template    || Yes || Yes || moodle_mobile_app
+|-
+| tool_lp || tool_lp_list_courses_using_competency ||    3.1    ||    List the courses using a competency    || Yes || Yes || 
+|-
+| tool_lp || tool_lp_search_cohorts ||    3.1    ||    Search for cohorts.    || Yes || Yes || 
+|-
+| tool_lp || tool_lp_search_users ||    3.1    ||    Search for users.    || Yes || Yes || 
+|-
+| tool_mobile || tool_mobile_get_autologin_key ||   3.2   ||   Creates an auto-login key for the current user.                            Is created only in https sites and is restricted by time and ip address.   || No || Yes || moodle_mobile_app
+|-
+| tool_mobile || tool_mobile_get_config ||   3.2   ||   Returns a list of the site configurations, filtering by section.   || No || Yes || moodle_mobile_app
+|-
+| tool_mobile || tool_mobile_get_plugins_supporting_mobile ||    3.1    ||    Returns a list of Moodle plugins supporting the mobile app.    || No || Yes || moodle_mobile_app
+|-
+| tool_mobile || tool_mobile_get_public_config ||   3.2   ||   Returns a list of the site public settings, those not requiring authentication.   || Yes || No || moodle_mobile_app
+|-
+| tool_templatelibrary || tool_templatelibrary_list_templates ||   3.0   ||   List/search templates by component.   || Yes || No || 
+|-
+| tool_templatelibrary || tool_templatelibrary_load_canonical_template ||   3.0   ||   Load a canonical template by name (not the theme overidden one).   || Yes || No || 
+|-
+| tool_usertours || tool_usertours_complete_tour ||   3.2   ||   Mark the specified tour as completed for the current user   || Yes || Yes || 
+|-
+| tool_usertours || tool_usertours_fetch_and_start_tour ||   3.2   ||   Fetch the specified tour   || Yes || Yes || 
+|-
+| tool_usertours || tool_usertours_reset_tour ||   3.2   ||   Remove the specified tour   || Yes || Yes || 
+|-
+| tool_usertours || tool_usertours_step_shown ||   3.2   ||   Mark the specified step as completed for the current user   || Yes || Yes || 
+|-
+| core_auth || core_auth_request_password_reset || 3.4 || Requests a password reset. ||
+|-
+| core_calendar || core_calendar_get_calendar_day_view || 3.4 || Fetch the day view data for a calendar ||
+|-
+| core_calendar || core_calendar_get_calendar_event_by_id || 3.4 || Get calendar event by id ||
+|-
+| core_calendar || core_calendar_get_calendar_monthly_view || 3.4 || Fetch the monthly view data for a calendar ||
+|-
+| core_calendar || core_calendar_get_calendar_upcoming_view || 3.4 || Fetch the upcoming view data for a calendar ||
+|-
+| core_calendar || core_calendar_submit_create_update_form || 3.4 || Submit form data for event form ||
+|-
+| core_calendar || core_calendar_update_event_start_day || 3.4 || Update the start day (but not time) for an event. ||
+|-
+| core_cohort || core_cohort_search_cohorts || 3.4 || Search for cohorts. ||
+|-
+| core_completion || core_completion_override_activity_completion_status || 3.4 || Update completion status for a user in an activity by overriding it. ||
+|-
+| core_enrol || core_enrol_edit_user_enrolment || 3.4 || External function that updates a given user enrolment ||
+|-
+| core_enrol || core_enrol_get_potential_users || 3.4 || Get the list of potential users to enrol ||
+|-
+| core_enrol || core_enrol_unenrol_user_enrolment || 3.4 || External function that unenrols a given user enrolment ||
+|-
+| core_filters || core_filters_get_available_in_context || 3.4 || Returns the filters available in the given contexts. ||
+|-
+| core_form || core_form_get_filetypes_browser_data || 3.4 || Provides data for the filetypes element browser. ||
+|-
+| core_user || core_user_get_private_files_info || 3.4 || Returns general information about files in the user private files area. ||
+|-
+| local_mobile || local_mobile_get_plugin_settings || 3.4 || Retrieve the plugin settings. ||
+|-
+| mod_workshop || mod_workshop_add_submission || 3.4 || Add a new submission to a given workshop. ||
+|-
+| mod_workshop || mod_workshop_delete_submission || 3.4 || Deletes the given submission. ||
+|-
+| mod_workshop || mod_workshop_evaluate_assessment || 3.4 || Evaluates an assessment (used by teachers for provide feedback to the reviewer). ||
+|-
+| mod_workshop || mod_workshop_evaluate_submission || 3.4 || Evaluates a submission (used by teachers for provide feedback or override the submission grade). ||
+|-
+| mod_workshop || mod_workshop_get_assessment || 3.4 || Retrieves the given assessment. ||
+|-
+| mod_workshop || mod_workshop_get_assessment_form_definition || 3.4 || Retrieves the assessment form definition. ||
+|-
+| mod_workshop || mod_workshop_get_grades || 3.4 || Returns the assessment and submission grade for the given user. ||
+|-
+| mod_workshop || mod_workshop_get_grades_report || 3.4 || Retrieves the assessment grades report. ||
+|-
+| mod_workshop || mod_workshop_get_reviewer_assessments || 3.4 || Retrieves all the assessments reviewed by the given user. ||
+|-
+| mod_workshop || mod_workshop_get_submission || 3.4 || Retrieves the given submission. ||
+|-
+| mod_workshop || mod_workshop_get_submission_assessments || 3.4 || Retrieves all the assessments of the given submission. ||
+|-
+| mod_workshop || mod_workshop_get_submissions || 3.4 || Retrieves all the workshop submissions or the one done by the given user (except example submissions). ||
+|-
+| mod_workshop || mod_workshop_get_user_plan || 3.4 || Return the planner information for the given user. ||
+|-
+| mod_workshop || mod_workshop_get_workshop_access_information || 3.4 || Return access information for a given workshop. ||
+|-
+| mod_workshop || mod_workshop_get_workshops_by_courses || 3.4 || Returns a list of workshops in a provided list of courses, if no list is provided all workshops that
+                            the user can view will be returned. ||
+|-
+| mod_workshop || mod_workshop_update_assessment || 3.4 || Add information to an allocated assessment. ||
+|-
+| mod_workshop || mod_workshop_update_submission || 3.4 || Update the given submission. ||
+|-
+| mod_workshop || mod_workshop_view_submission || 3.4 || Trigger the submission viewed event. ||
+|-
+| mod_workshop || mod_workshop_view_workshop || 3.4 || Trigger the course module viewed event and update the module completion status. ||
+|-
+| report_insights || report_insights_set_fixed_prediction || 3.4 || Flags a prediction as fixed. ||
+|-
+| report_insights || report_insights_set_notuseful_prediction || 3.4 || Flags the prediction as not useful. ||

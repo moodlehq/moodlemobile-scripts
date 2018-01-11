@@ -98,10 +98,18 @@ $specialstrings = array(
     'mm.login.invalidurl',
     'mm.core.search',
     'mma.mod_feedback.continue_the_form',
+    'mm.courses.paypalaccepted',
+    'mm.courses.sendpaymentbutton',
+    'mm.fileuploader.invalidfiletype',
+    'mm.fileuploader.more',
 );
 
 foreach ($finalstrings as $key => $value) {
     if (strpos($key, 'mm.core.country') !== false) {
+        continue;
+    }
+
+    if (strpos($key, 'mm.core.mimetype') !== false) {
         continue;
     }
 
@@ -156,6 +164,25 @@ foreach ($finalstrings as $key => $value) {
                 continue 2;
             }
         }
+    } else if (strpos($key, 'mma.mod_workshop') !== false) {
+        list($comp, $mod, $id) = explode(".", $key);
+        list($t, $modname) = explode("_", $mod);
+        $checkin = array(
+                "/mod/workshop/lang/en/workshop.php",
+                "/mod/workshop/form/numerrors/lang/en/workshopform_numerrors.php",
+                "/mod/workshop/form/rubric/lang/en/workshopform_rubric.php",
+                "/mod/workshop/form/accumulative/lang/en/workshopform_accumulative.php",
+                "/mod/workshop/form/comments/lang/en/workshopform_comments.php",
+            );
+
+        foreach ($checkin as $langfile) {
+            $string = array();
+            include(MOODLE_STRING_FILES_PATH . $langfile);
+            if (compare_strings($string, $id, $value)) {
+                echo "$modname string with id $key exists \n";
+                continue 2;
+            }
+        }
     } else if (strpos($key, 'mma.mod_') !== false) {
         list($comp, $mod, $id) = explode(".", $key);
         list($t, $modname) = explode("_", $mod);
@@ -183,6 +210,7 @@ foreach ($finalstrings as $key => $value) {
             "/lang/en/repository.php",
             '/enrol/guest/lang/en/enrol_guest.php',
             "/admin/tool/usertours/lang/en/tool_usertours.php",
+            "/lang/en/form.php",
         );
 
         foreach ($checkin as $langfile) {

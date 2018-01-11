@@ -16,6 +16,13 @@
 
 /**
  * Script for documenting in Wiki format new Web Services added in MOODLE_LATEST_VERSION.
+ * How to use:
+ * Upon each new release.
+ * 1. Update the MOODLE_LATEST_VERSION_NUMBER constant
+ * 2. Create a documentation.txt file, copying the wiki code of the functions table (see documentation.txt file as example)
+ * 3. Run the script: php ws-documenter.php >> documentation.txt (this will append the new WS functions in the documentation.txt file)
+ * 4. Execute the ordering script: php ws-documentation-ordering.php > doc-order.txt
+ * 5. Update the wiki page https://docs.moodle.org/dev/Web_service_API_functions#Core_web_service_functions with the new table.
  */
 
 // Check we are in CLI.
@@ -26,9 +33,9 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("CLI_SCRIPT", 1);
 define("MOODLE_INTERNAL", 1);
 
-define("MOODLE_PREVIOUS_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_32/moodle");
-define("MOODLE_LATEST_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_master/moodle");
-define("MOODLE_LATEST_VERSION_NUMBER", "3.3");
+define("MOODLE_PREVIOUS_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_33/moodle");
+define("MOODLE_LATEST_VERSION",   "/Users/juanleyvadelgado/wwwdata/m/stable_34/moodle");
+define("MOODLE_LATEST_VERSION_NUMBER", "3.4");
 
 if (!file_exists(MOODLE_LATEST_VERSION)) {
     exit("Invalid path" . MOODLE_LATEST_VERSION);

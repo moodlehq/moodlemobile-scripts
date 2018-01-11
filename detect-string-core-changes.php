@@ -26,7 +26,7 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("MOODLE_INTERNAL", 1);
 
 define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle-langpacks/");
-define("BRANCH", "MOODLE_33_STABLE");
+define("BRANCH", "MOODLE_34_STABLE");
 define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/");
 
 function convert_string($string) {

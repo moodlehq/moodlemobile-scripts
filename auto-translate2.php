@@ -28,7 +28,7 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("MOODLE_INTERNAL", 1);
 
 define("STRING_FILES_PATH", "/Users/juanleyvadelgado/Documents/MoodleMobile/moodle-langpacks/moodle-langpacks/");
-define("BRANCH", "MOODLE_33_STABLE");
+define("BRANCH", "MOODLE_34_STABLE");
 define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/");
 define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/");
 
@@ -39,13 +39,15 @@ $moodlestringfiles = array('my.php', 'moodle.php', 'error.php', 'repository.php'
                             'search.php', 'scorm.php', 'message.php', 'wiki.php', 'quiz.php', 'grades.php', 'grading.php',
                             'assignsubmission_onlinetext', 'assignsubmission_file.php', 'assignsubmission_comments.php',
                             'assignfeedback_comments.php', 'assignfeedback_editpdf.php', 'assignfeedback_file.php', 'assignfeedback_offline.php',
-                            'question.php',
+                            'question.php', 'workshop.php',
                             'quizaccess_delaybetweenattempts.php', 'quizaccess_ipaddress.php', 'quizaccess_numattempts.php',
                             'quizaccess_openclosedate.php', 'quizaccess_password.php', 'quizaccess_safebrowser.php',
                             'quizaccess_securewindow.php', 'quizaccess_timelimit.php',
-                            'compentency.php', 'tool_lp.php', 'auth.php', 'langconfig.php', 'enrol_guest.php', 'block_myoverview.php',
-                            'calendar.php'
+                            'competency.php', 'tool_lp.php', 'auth.php', 'langconfig.php', 'enrol_guest.php', 'block_myoverview.php',
+                            'calendar.php', 'enrol_paypal.php', 'mimetypes.php', 'workshopform_accumulative.php',
+                            'workshopform_comments.php', 'workshopform_numerrors.php', 'workshopform_rubric.php'
                             );
+
 $numfound = 0;
 $numnotfound = 0;
 $notfound = array();
@@ -73,6 +75,15 @@ $forcedstrings = array(
     'mma.myoverview.pluginname' => 'block_myoverview.php',
     'mm.core.download' => 'moodle.php',
     'mm.core.previous' => 'moodle.php',
+    'mm.courses.paypalaccepted' => 'enrol_paypal.php',
+    'mm.courses.sendpaymentbutton' => 'enrol_paypal.php',
+    'mm.fileuploader.more' => 'data.php',
+    'mm.fileuploader.invalidfiletype' => 'repository.php',
+    'mm.user.details' => 'report_security.php',
+    'mm.settings.settings' => 'moodle.php',
+    'mm.settings.settings' => 'moodle.php',
+    'mma.competency.learningplans' => 'tool_lp.php',
+    'mma.competency.myplans' => 'tool_lp.php',
 );
 
 foreach ($moodlestringfiles as $stringfilename) {
@@ -85,13 +96,33 @@ foreach ($moodlestringfiles as $stringfilename) {
         $_lang = str_replace('-', '_', $lang);
         $stringfile = STRING_FILES_PATH . "$_lang/$stringfilename";
         if (!file_exists($stringfile)) {
-            // print("String file $stringfilename doesn't exists for language $lang (Path: $stringfile)\n");
-            continue;
+            if (strpos($lang, '-') !== false) {
+                $parentlang = substr($lang, 0, strpos($lang, '-'));
+                $parentstringfile = STRING_FILES_PATH . "$parentlang/$stringfilename";
+                if (file_exists($parentstringfile)) {
+                    $stringfile = $parentstringfile;
+                } else {
+                    continue;
+                }
+            } else {
+                continue;
+            }
         }
 
         // Load Moodle string file.
         $string = array();
         include($stringfile);
+
+        if (strpos($lang, '-') !== false) {
+            $currentstrings = $string;
+            $string = array();
+            $parentlang = substr($lang, 0, strpos($lang, '-'));
+            $parentstringfile = STRING_FILES_PATH . "$parentlang/$stringfilename";
+            if (file_exists($parentstringfile)) {
+                include($parentstringfile);
+                $string = array_merge($string, $currentstrings);
+            }
+        }
 
         // Load app JSON file.
         $jsonfile = JSON_FILES_PATH . "$lang.json";
@@ -109,7 +140,7 @@ foreach ($moodlestringfiles as $stringfilename) {
             list($type, $component, $plainid) = explode('.', $id);
 
             if (isset($forcedstrings[$id])) {
-                if ($stringfilename == $forcedstrings[$id]) {
+                if ($stringfilename == $forcedstrings[$id] && !empty($string[$plainid])) {
                     $jsonstrings[$id] = str_replace('$a->', '$a.', $string[$plainid]);
                     $jsonstrings[$id] = str_replace('{$a', '{{$a', $jsonstrings[$id]);
                     $jsonstrings[$id] = str_replace('}', '}}', $jsonstrings[$id]);
@@ -124,10 +155,6 @@ foreach ($moodlestringfiles as $stringfilename) {
                 }
             }
 
-
-            continue;
-
-
             if ($component == 'myoverview') {
                 if ($stringfilename != 'block_myoverview.php') {
                     continue;
@@ -138,6 +165,7 @@ foreach ($moodlestringfiles as $stringfilename) {
 
             if (strpos($plainid, 'mod_') !== false) {
                 $modname = str_replace('mod_', '', $plainid);
+
                 if ($modname == str_replace('.php', '', $stringfilename)) {
                     $found = true;
                     $numfound++;
@@ -149,10 +177,21 @@ foreach ($moodlestringfiles as $stringfilename) {
                 }
             }
 
+            if ($stringfilename == 'mimetypes.php' && strpos($plainid, 'mimetype-') !== false) {
+                $mimetypeid = str_replace('mimetype-', '', $plainid);
+                if (!empty($string[$mimetypeid])) {
+                    $jsonstrings[$id] = $string[$mimetypeid];
+                }
+                continue;
+            }
+
             // We are translating and addon that is a Moodle module.
             $ismoodleplugin = false;
             if (strpos($component, 'mod_') !== false) {
-                list($mod, $modname) = explode('_', $component);
+                $modname = str_replace('mod_workshop_assessment', 'mod_workshopform', $component);
+                $modname = str_replace('mod_assign_', 'mod_assign', $modname);
+                $modname = str_replace('mod_', '', $modname);
+
                 if ($modname == str_replace('.php', '', $stringfilename)) {
                     $ismoodleplugin = true;
                 }
@@ -199,8 +238,13 @@ foreach ($moodlestringfiles as $stringfilename) {
             list($type, $component) = explode('.', $key);
             if ($type == 'mma') {
                 if (strpos($component, '_') !== false ) {
-                    list($dir, $subdir) = explode('_', $component);
-                    $component = $dir."/".$subdir;
+                    if (substr_count($component, '_') == 1) {
+                        list($dir, $subdir) = explode('_', $component);
+                        $component = $dir."/".$subdir;
+                    } else {
+                        list($dir, $subdir, $subdir2, $subdir3) = explode('_', $component);
+                        $component = $dir."/".$subdir."/".$subdir2."/".$subdir3;
+                    }
                 }
                 $path = CORE_FILES_PATH . "addons/$component/lang/$lang.json";
             } else {

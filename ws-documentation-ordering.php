@@ -27,7 +27,7 @@ define("CLI_SCRIPT", 1);
 define("MOODLE_INTERNAL", 1);
 
 define("MOODLE_LATEST_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_master/moodle");
-define("DOCUMENTATION_PATH", "doc.txt");
+define("DOCUMENTATION_PATH", "documentation.txt");
 
 require_once(MOODLE_LATEST_VERSION . '/config.php');
 

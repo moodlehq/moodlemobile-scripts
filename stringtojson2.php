@@ -26,19 +26,31 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 
 define("JSON_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/build/lang/");
 define("CORE_FILES_PATH",   "/Users/juanleyvadelgado/Documents/MoodleMobile/moodlemobile2/www/");
+// The language string file checks for this constant.
+define("MOODLE_INTERNAL", 1);
 
 $jsonfile = JSON_FILES_PATH . "en.json";
 $masterstrings = file_get_contents($jsonfile);
 $masterstrings = (array) json_decode($masterstrings);
 
-$lang = str_replace('_', '-', $argv[1]);
+$originallang = $argv[1];
+$lang = str_replace('_', '-', $originallang);
 $file = $argv[2];
 
 $string = array();
 if (file_exists($file)) {
-    // The language string file checks for this constant.
-    define("MOODLE_INTERNAL", 1);
     include($file);
+}
+
+if (strpos($lang, '-') !== false) {
+    $currentstrings = $string;
+    $string = array();
+    $parentlang = substr($lang, 0, strpos($lang, '-'));
+    $parentstringfile = str_replace("/$originallang/", "/$parentlang/",$file);
+    if (file_exists($parentstringfile)) {
+        include($parentstringfile);
+        $string = array_merge($string, $currentstrings);
+    }
 }
 
 if (!empty($string)) {
@@ -91,9 +103,15 @@ if (!empty($string)) {
         list($type, $component) = explode('.', $key);
         if ($type == 'mma') {
             if (strpos($component, '_') !== false ) {
-                list($dir, $subdir) = explode('_', $component);
-                $component = $dir."/".$subdir;
+                if (substr_count($component, '_') == 1) {
+                    list($dir, $subdir) = explode('_', $component);
+                    $component = $dir."/".$subdir;
+                } else {
+                    list($dir, $subdir, $subdir2, $subdir3) = explode('_', $component);
+                    $component = $dir."/".$subdir."/".$subdir2."/".$subdir3;
+                }
             }
+
             $path = CORE_FILES_PATH . "addons/$component/lang/$lang.json";
         } else {
             switch ($component) {
