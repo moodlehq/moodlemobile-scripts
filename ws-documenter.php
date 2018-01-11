@@ -18,9 +18,9 @@
  * Script for documenting in Wiki format new Web Services added in MOODLE_LATEST_VERSION.
  * How to use:
  * Upon each new release.
- * 1. Update the MOODLE_LATEST_VERSION_NUMBER constant
- * 2. Create a documentation.txt file, copying the wiki code of the functions table (see documentation.txt file as example)
- * 3. Run the script: php ws-documenter.php >> documentation.txt (this will append the new WS functions in the documentation.txt file)
+ * 1. Update the MOODLE_LATEST_VERSION_NUMBER, MOODLE_PREVIOUS_VERSION and MOODLE_LATEST_VERSION constants.
+ * 2. Create a documentation.txt file, copying the wiki code of the functions table without the table header and footer (see documentation.txt file as example)
+ * 3. Run the script: php ws-documenter.php >> documentation.txt (this will append the new WS functions in Moodle latest version to the documentation.txt file)
  * 4. Execute the ordering script: php ws-documentation-ordering.php > doc-order.txt
  * 5. Update the wiki page https://docs.moodle.org/dev/Web_service_API_functions#Core_web_service_functions with the new table.
  */
