@@ -33,9 +33,9 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 define("CLI_SCRIPT", 1);
 define("MOODLE_INTERNAL", 1);
 
-define("MOODLE_PREVIOUS_VERSION", "/Users/juanleyvadelgado/wwwdata/m/stable_33/moodle");
-define("MOODLE_LATEST_VERSION",   "/Users/juanleyvadelgado/wwwdata/m/stable_34/moodle");
-define("MOODLE_LATEST_VERSION_NUMBER", "3.4");
+define("MOODLE_PREVIOUS_VERSION", "/Users/juanleyvadelgado/moodles/stable_35/moodle");  // Do not use soft linked paths.
+define("MOODLE_LATEST_VERSION",   "/Users/juanleyvadelgado/moodles/stable_master/moodle");  // Do not use soft linked paths.
+define("MOODLE_LATEST_VERSION_NUMBER", "3.6");
 
 if (!file_exists(MOODLE_LATEST_VERSION)) {
     exit("Invalid path" . MOODLE_LATEST_VERSION);

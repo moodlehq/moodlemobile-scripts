@@ -941,3 +941,81 @@
 | report_insights || report_insights_set_fixed_prediction || 3.4 || Flags a prediction as fixed. ||
 |-
 | report_insights || report_insights_set_notuseful_prediction || 3.4 || Flags the prediction as not useful. ||
+|-
+| core_message || core_message_mark_notification_read || 3.5 || Mark a single notification as read, trigger notification_viewed event. ||
+|-
+| core_question || core_question_get_random_question_summaries || 3.5 || Get the random question set for a criteria ||
+|-
+| core_question || core_question_submit_tags_form || 3.5 || Update the question tags. ||
+|-
+| \core_search || core_search_get_relevant_users || 3.5 || Gets relevant users for a search request. ||
+|-
+| mod_chat || mod_chat_get_session_messages || 3.5 || Retrieves messages of the given chat session. ||
+|-
+| mod_chat || mod_chat_get_sessions || 3.5 || Retrieves chat sessions for a given chat. ||
+|-
+| tool_mobile || tool_mobile_get_content || 3.5 || Returns a piece of content to be displayed in the Mobile app. ||
+|-
+| block_recentlyaccesseditems || block_recentlyaccesseditems_get_recent_items || 3.6 || List of items a user has accessed most recently. ||
+|-
+| block_starredcourses || block_starredcourses_get_starred_courses || 3.6 || Get users starred courses. ||
+|-
+| core_auth || core_auth_resend_confirmation_email || 3.6 || Resend confirmation email. ||
+|-
+| core_block || core_block_get_dashboard_blocks || 3.6 || Returns blocks information for the given user dashboard. ||
+|-
+| core_blog || core_blog_get_entries || 3.6 || Returns blog entries. ||
+|-
+| core_blog || core_blog_view_entries || 3.6 || Trigger the blog_entries_viewed event. ||
+|-
+| core_course || core_course_get_enrolled_courses_by_timeline_classification || 3.6 || List of enrolled courses for the given timeline classification (past, inprogress, or future). ||
+|-
+| core_course || core_course_get_recent_courses || 3.6 || List of courses a user has accessed most recently. ||
+|-
+| core_course || core_course_set_favourite_courses || 3.6 || Add a list of courses to the list of favourite courses. ||
+|-
+| core_group || core_group_update_groups || 3.6 || Updates existing groups. ||
+|-
+| core_message || core_message_block_user || 3.6 || Blocks a user ||
+|-
+| core_message || core_message_confirm_contact_request || 3.6 || Confirms a contact request ||
+|-
+| core_message || core_message_create_contact_request || 3.6 || Creates a contact request ||
+|-
+| core_message || core_message_decline_contact_request || 3.6 || Declines a contact request ||
+|-
+| core_message || core_message_delete_conversations_by_id || 3.6 || Deletes a list of conversations. ||
+|-
+| core_message || core_message_get_contact_requests || 3.6 || Returns contact requests for a user ||
+|-
+| core_message || core_message_get_conversation || 3.6 || Retrieve a conversation for a user ||
+|-
+| core_message || core_message_get_conversation_between_users || 3.6 || Retrieve a conversation for a user between another user ||
+|-
+| core_message || core_message_get_conversation_counts || 3.6 || Retrieve a list of conversation counts, indexed by type. ||
+|-
+| core_message || core_message_get_conversation_members || 3.6 || Retrieve a list of members in a conversation ||
+|-
+| core_message || core_message_get_conversation_messages || 3.6 || Retrieve the conversation messages and relevant member information ||
+|-
+| core_message || core_message_get_conversations || 3.6 || Retrieve a list of conversations for a user ||
+|-
+| core_message || core_message_get_member_info || 3.6 || Retrieve a user message profiles ||
+|-
+| core_message || core_message_get_received_contact_requests_count || 3.6 || Gets the number of received contact requests ||
+|-
+| core_message || core_message_get_user_contacts || 3.6 || Retrieve the contact list ||
+|-
+| core_message || core_message_mark_all_conversation_messages_as_read || 3.6 || Mark all conversation messages as read for a given user ||
+|-
+| core_message || core_message_message_search_users || 3.6 || Retrieve the data for searching for people ||
+|-
+| core_message || core_message_send_messages_to_conversation || 3.6 || Send messages to an existing conversation between users ||
+|-
+| core_message || core_message_set_favourite_conversations || 3.6 || Mark a conversation or group of conversations as favourites/starred conversations. ||
+|-
+| core_message || core_message_unblock_user || 3.6 || Unblocks a user ||
+|-
+| core_message || core_message_unset_favourite_conversations || 3.6 || Unset a conversation or group of conversations as favourites/starred conversations. ||
+|-
+| tool_xmldb || tool_xmldb_invoke_move_action || 3.6 || moves element up/down ||
